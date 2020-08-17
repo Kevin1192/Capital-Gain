@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import { FormControl, OutlinedInput, InputLabel, InputAdornment, makeStyles, Button } from "@material-ui/core";
 import { MuiPickersUtilsProvider , KeyboardDatePicker } from '@material-ui/pickers';
 
+
+import {calcuLong,calcuLongSingle} from '../library/capitalGainFunctions';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -149,8 +151,20 @@ function CapitalGainForm() {
           <Button type='submit' color='primary' variant='contained'>Submit</Button>
         </Paper>
       </form>
+
     </Fragment>
   );
 }
 
+ const states = {
+   filingStatus: "Single",
+   taxableIncome: 30000,
+   stateTaxRate: 0,
+   selectedPurchaseDate: new Date(),
+   selectedSaleDate: new Date(),
+   purchaseAmount: 10000,
+   saleAmount: 50000,
+ };
+
+      console.log(calcuLongSingle(states));
 export default CapitalGainForm;

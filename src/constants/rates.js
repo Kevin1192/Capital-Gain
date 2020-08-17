@@ -56,8 +56,6 @@ const shortTermRatesMarriedSeparately = {
   thirtyFivePercent: 311025,
 };
 
-
-
 const rates = {
     single: {
         longTerm: longTermRatesSingle,
