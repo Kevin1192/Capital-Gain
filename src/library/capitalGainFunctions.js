@@ -27,6 +27,17 @@ const calcuLongSingle =  (states) => {
     } else return capitalGain * 0.2;
 }
 
+const calcuLongHead = (states) => {
+
+}
+
+
+const calcuLongMarriedJointly = (states) => {
+
+}
+const calcuLongMarriedSeparately = (states) => {
+    
+}
 const states = {
   filingStatus: "Single",
   taxableIncome: 30000,
