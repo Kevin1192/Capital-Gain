@@ -38,6 +38,12 @@ const calcuLongMarriedJointly = (states) => {
 const calcuLongMarriedSeparately = (states) => {
     
 }
+
+
+const calcuShortHead = (states) => {};
+
+const calcuShortMarriedJointly = (states) => {};
+const calcuShortMarriedSeparately = (states) => {};
 const states = {
   filingStatus: "Single",
   taxableIncome: 30000,
