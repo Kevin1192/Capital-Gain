@@ -4,6 +4,10 @@ In Development.
 
 
 Capital Gain
+
+
   --Long Term
+  
+  
   --Short Term
   
