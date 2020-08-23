@@ -11,3 +11,9 @@ Capital Gain
   
   --Short Term
   
+  Filing status:
+  1. Single
+  2. Head of Household
+  3. Married Jointly
+  4. Married Separately
+  
