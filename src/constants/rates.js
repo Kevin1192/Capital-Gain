@@ -1,59 +1,59 @@
 const longTermRatesSingle = {
-    zeroPercent: 40000,
-    fifteenPercent: 441450,
+    0: 40000,
+    0.15: 441450,
 
 }
 
 const longTermRatesHead = {
-  zeroPercent: 53600,
-  fifteenPercent: 469050,
+  0: 53600,
+  0.15: 469050,
 };
 
 const longTermRatesMarriedJointly = {
-  zeroPercent: 80000,
-  fifteenPercent: 496600,
+  0: 80000,
+  0.15: 496600,
 };
 
 const longTermRatesMarriedSeparately = {
-  zeroPercent: 40000,
-  fifteenPercent: 248300,
+  0: 40000,
+  0.15: 248300,
 };
 
 const shortTermRatesSingle = {
-  tenPercent: 9875,
-  twelvePercent: 40125,
-  twentyTwoPercent: 85525,
-  twentyFourPercent: 163300,
-  thirtyTwoPercent: 207350,
-  thirtyFivePercent: 518400,
+  0.10: 9875,
+  0.12: 40125,
+  0.22: 85525,
+  0.24: 163300,
+  0.32: 207350,
+  0.35: 518400,
 };
 
 const shortTermRatesHead = {
-  tenPercent: 14100,
-  twelvePercent: 53700,
-  twentyTwoPercent: 85500,
-  twentyFourPercent: 163300,
-  thirtyTwoPercent: 207350,
-  thirtyFivePercent: 518400,
+  0.10: 14100,
+  0.12: 53700,
+  0.22: 85500,
+  0.24: 163300,
+  0.32: 207350,
+  0.35: 518400,
 };
 
 
 const shortTermRatesMarriedJointly = {
-  tenPercent: 19750,
-  twelvePercent: 80250,
-  twentyTwoPercent: 171050,
-  twentyFourPercent: 326600,
-  thirtyTwoPercent: 414700,
-  thirtyFivePercent: 622050,
+  0.10: 19750,
+  0.12: 80250,
+  0.22: 171050,
+  0.24: 326600,
+  0.32: 414700,
+  0.35: 622050,
 };
 
 const shortTermRatesMarriedSeparately = {
-  tenPercent: 9875,
-  twelvePercent: 40125,
-  twentyTwoPercent: 85525,
-  twentyFourPercent: 163300,
-  thirtyTwoPercent: 207350,
-  thirtyFivePercent: 311025,
+  0.10: 9875,
+  0.12: 40125,
+  0.22: 85525,
+  0.24: 163300,
+  0.32: 207350,
+  0.35: 311025,
 };
 
 const rates = {
