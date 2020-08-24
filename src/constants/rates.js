@@ -57,24 +57,17 @@ const shortTermRatesMarriedSeparately = {
 };
 
 const rates = {
-    single: {
-        longTerm: longTermRatesSingle,
-        shortTerm: shortTermRatesSingle,
-    },
-    headOfHousehold: {
-        longTerm: longTermRatesHead,
-        shortTerm: shortTermRatesHead,
-    },
-    marriedJointly: {
-        longTerm: longTermRatesMarriedJointly,
-        shortTerm: shortTermRatesMarriedJointly,
-    },
-    marriedSeparately: {
-        longTerm: longTermRatesMarriedSeparately,
-        shortTerm: shortTermRatesMarriedSeparately,
-    }
-
-}
-
-
+  longTerm: {
+    single: longTermRatesSingle,
+    headOfHousehold: longTermRatesHead,
+    marriedJointly: longTermRatesMarriedJointly,
+    marriedSeparately: longTermRatesMarriedSeparately,
+  },
+  shortTerm: {
+    single: shortTermRatesSingle,
+    headOfHousehold: shortTermRatesHead,
+    marriedJointly: shortTermRatesMarriedJointly,
+    marriedSeparately: shortTermRatesMarriedSeparately,
+  },
+};
 export default rates;
