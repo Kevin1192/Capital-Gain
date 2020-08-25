@@ -9,7 +9,7 @@ import { FormControl, OutlinedInput, InputLabel, InputAdornment, makeStyles, But
 import { MuiPickersUtilsProvider , KeyboardDatePicker } from '@material-ui/pickers';
 
 
-import {calcuCapitalGain,calcuLongSingle} from '../library/capitalGainFunctions';
+import {calcuCapitalGain} from '../library/capitalGainFunctions';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -165,7 +165,5 @@ function CapitalGainForm() {
    purchaseAmount: 10000,
    saleAmount: 50000,
  };
-
-      console.log(calcuLongSingle(states));
       console.log(calcuCapitalGain(states));
 export default CapitalGainForm;
