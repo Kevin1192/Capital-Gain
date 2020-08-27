@@ -14,7 +14,6 @@ const determineTermAndSd = (states) => {
     selectedPurchaseDate,
     selectedSaleDate,
     filingStatus,
-    taxableIncome,
   } = states;
   let rate, sd, term;
   selectedPurchaseDate.setFullYear(selectedPurchaseDate.getFullYear() + 1);
@@ -90,6 +89,9 @@ const determineStandardDeduction = (filingStatus) => {
 };
 
 const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
+    console.log(capitalGain, 'capitalgain');
+    console.log('incomeAfterdeduc', incomeAfterDeduction);
+    console.log(rate);
   const capitalGainWithIncome = capitalGain + incomeAfterDeduction;
   let incomeLimit, capitalGainLimit, totalCapitalGainTax;
   // find Limits for incomeAfterSD: [rate, Amount, index]
@@ -100,6 +102,7 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
       }
   }
 
+
   // find Limits for CGAI
   for (let i = 0; i < rate.length; i++) {
     if (capitalGainWithIncome <= rate[i][1]) {
@@ -107,6 +110,9 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
       break;
     }
   }
+
+    console.log(capitalGainLimit);
+
 
   //if incomeLimit and capitalGainLimit are the same, CG * limit rate;
   if (incomeLimit[2] === capitalGainLimit[2])

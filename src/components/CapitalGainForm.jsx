@@ -156,14 +156,15 @@ function CapitalGainForm() {
   );
 }
 
+
  const states = {
    filingStatus: "Single",
-   taxableIncome: 30000,
+   taxableIncome: 72400,
    stateTaxRate: 0,
-   selectedPurchaseDate: new Date('2018-12-09'),
+   selectedPurchaseDate: new Date("2018-01-09"),
    selectedSaleDate: new Date(),
    purchaseAmount: 10000,
-   saleAmount: 50000,
+   saleAmount: 510000,
  };
       console.log(calcuCapitalGain(states));
 export default CapitalGainForm;
