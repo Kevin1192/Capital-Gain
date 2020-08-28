@@ -147,14 +147,5 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
   return totalCapitalGainTax;
 };
 
-const states = {
-  filingStatus: "Single",
-  taxableIncome: 30000,
-  stateTaxRate: 0,
-  selectedPurchaseDate: new Date(),
-  selectedSaleDate: new Date(),
-  purchaseAmount: 10000,
-  saleAmount: 50000,
-};
 
 export { calcuCapitalGain };
