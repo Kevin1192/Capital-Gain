@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
   taxHighlight: {
     color: "#87CEEB",
   },
+  report: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  }
 }));
 
 function CapitalGainForm() {
@@ -39,14 +44,14 @@ function CapitalGainForm() {
     selectedSaleDate: new Date(),
     purchaseAmount: 0,
     saleAmount: 0,
+    capitalGain: 0
   });
   
-  const capitalGain = values.saleAmount - values.purchaseAmount;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let totalCG = calcuCapitalGainTax(values);
-    setValues({...values, totalCapitalGainTax: totalCG})
+    setValues((preState) => ({...values, totalCapitalGainTax: totalCG, capitalGain: (preState.saleAmount - preState.purchaseAmount)}))
   }
   const handleDateChange = (prop) => (date) => {
       setValues({...values, [prop]: date});
@@ -168,7 +173,7 @@ function CapitalGainForm() {
             </Paper>
           </form>
         </Grid>
-        <Grid item xs={6} direction="column" justify="center" alignItems="center">
+        <Grid item xs={6} className={classes.report}>
           {values.totalCapitalGainTax === undefined || (
             [<Typography variant="h4" component="h5">
               Your total Capital Gain Tax:{" "}
@@ -179,7 +184,7 @@ function CapitalGainForm() {
               <Typography variant="h4" component="h5">
               Your total Capital Gain after tax:{" "}
               <span className={classes.taxHighlight}>
-                ${capitalGain - values.totalCapitalGainTax}
+                ${values.capitalGain - values.totalCapitalGainTax}
               </span>
             </Typography>]
           )}

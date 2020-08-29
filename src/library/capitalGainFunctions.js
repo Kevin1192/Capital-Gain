@@ -126,7 +126,7 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
       (capitalGainWithIncome - incomeLimit[1]) * capitalGainLimit[0];
   // if leap by more than 1;
   if (capitalGainLimit[2] - incomeLimit[2] > 1) {
-    let leapCapitalTax;
+    let leapCapitalTax = 0;
 
     // calculate taxes for full leap tax brackets;
     for (let i = 0; i < capitalGainLimit[2] - incomeLimit[2] - 1; i++) {
@@ -138,7 +138,6 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
         rateAndAmountAfter[0];
     }
 
-    console.log(leapCapitalTax, 'leap')
     // 
     totalCapitalGainTax =
       (incomeLimit[1] - incomeAfterDeduction) * incomeLimit[0] +
