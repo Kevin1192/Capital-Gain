@@ -1,12 +1,13 @@
 import rates from "../constants/rates";
 import standardDeduction from "../constants/standardDeduction";
 
-const calcuCapitalGain = (states) => {
+const calcuCapitalGainTax = (states) => {
   const capitalGain = states.saleAmount - states.purchaseAmount;
   console.log("capital gain " + capitalGain);
   if (capitalGain <= 0) return 0;
   const [rate, sd] = determineTermAndSd(states);
-  return finalCalcu(rate, states.taxableIncome - sd, capitalGain);
+  const incomeAfterDeduction = states.taxableIncome > sd ? (states.taxableIncome - sd) : 0;
+  return finalCalcu(rate, incomeAfterDeduction, capitalGain);
 };
 
 const determineTermAndSd = (states) => {
@@ -15,9 +16,10 @@ const determineTermAndSd = (states) => {
     selectedSaleDate,
     filingStatus,
   } = states;
-  let rate, sd, term;
-  selectedPurchaseDate.setFullYear(selectedPurchaseDate.getFullYear() + 1);
-  if (selectedPurchaseDate <= selectedSaleDate) {
+  let rate, sd, term, oneYearAfterPurchase;
+  oneYearAfterPurchase = new Date(selectedPurchaseDate);
+  oneYearAfterPurchase.setFullYear(selectedPurchaseDate.getFullYear() + 1);
+  if (oneYearAfterPurchase <= selectedSaleDate) {
     term = "long";
   } else {
     term = "short";
@@ -136,6 +138,7 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
         rateAndAmountAfter[0];
     }
 
+    console.log(leapCapitalTax, 'leap')
     // 
     totalCapitalGainTax =
       (incomeLimit[1] - incomeAfterDeduction) * incomeLimit[0] +
@@ -148,4 +151,4 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
 };
 
 
-export { calcuCapitalGain };
+export { calcuCapitalGainTax };
