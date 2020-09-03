@@ -1,0 +1,10 @@
+#topnav {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    border: 0;
+    background-color: transparent;
+    transition: all .5s ease;
+}
