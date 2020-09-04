@@ -39,7 +39,6 @@ function CapitalGainForm() {
   const [values, setValues] = React.useState({
     filingStatus: "Single",
     taxableIncome: 0,
-    stateTaxRate: 0,
     selectedPurchaseDate: new Date(),
     selectedSaleDate: new Date(),
     purchaseAmount: 0,
@@ -100,21 +99,6 @@ function CapitalGainForm() {
                   labelWidth={120}
                 />
               </FormControl>
-              <FormControl variant="outlined" className={classes.margin}>
-                <InputLabel htmlFor="outlined-adornment-statetaxrate">
-                  State Tax Rate
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-statetaxrate"
-                  value={values.stateTaxRate}
-                  onChange={handleChange("stateTaxRate")}
-                  endAdornment={
-                    <InputAdornment position="end">%</InputAdornment>
-                  }
-                  labelWidth={120}
-                />
-              </FormControl>
-
               <Typography variant="h4" component="h6">
                 Capital Gain
               </Typography>
