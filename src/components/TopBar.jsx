@@ -13,13 +13,11 @@ class Topbar extends Component {
         return (
             <React.Fragment>
                 <div id='topnav' >
-                    <div>
+                    <Container>
                         <div>
-                            <Link className='logo' to='/'>
-                                Logo
-                            </Link>
+                            <Link className='logo' to='/index'><h2>CapitalGainTaxCalculator</h2></Link>
                         </div>
-                    </div>
+                    </Container>
                 </div>
             </React.Fragment>
         )
