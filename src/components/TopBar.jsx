@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Container } from 'reactstrap';
 
 class Topbar extends Component {
     constructor(props) {
@@ -11,11 +13,17 @@ class Topbar extends Component {
         return (
             <React.Fragment>
                 <div id='topnav' >
-                    hi
+                    <div>
+                        <div>
+                            <Link className='logo' to='/'>
+                                Logo
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
         )
     }
 }
 
-export default Topbar;
+export default withRouter(Topbar);
