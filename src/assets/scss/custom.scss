@@ -1,0 +1,27 @@
+
+.Typist {
+    display: inline;
+}
+
+li.active > a {
+    color: #2f55d4 !important;
+}
+
+.pagination .active a {
+    color: #ffffff !important;
+}
+
+a {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-pills {
+    border-radius: 20px;
+}
+
+$theme-colors: (
+  "primary": #ffffff,
+  "danger": #ff4136
+);

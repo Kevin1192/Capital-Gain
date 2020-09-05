@@ -1,0 +1,16 @@
+@mixin home-common {
+    background-size: cover;
+    align-self: center;
+    position: relative;
+    background-position: center center;
+}
+
+.bg-home {
+    height: 100vh;
+    @include home-common();
+}
+
+.bg-half-170 {
+    padding: 170px 0;
+    @include home-common();
+}

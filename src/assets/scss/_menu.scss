@@ -7,14 +7,37 @@
     border: 0;
     background-color: transparent;
     transition: all .5s ease;
+    .logo {
+    float: left;
+    color: $dark !important;
+    margin-left: 0px;
+    line-height: 68px;
+    transition: all .5s ease;
+    &:hover {
+        transform: scale(0.9) rotate(1deg);
+    }
+    }
+    .auth {
+    float: right;
+    line-height: 68px;
+    }
+
+
+    &.nav-sticky {
+        background: $white;
+        box-shadow: $shadow;
+    }
+
 }
 
 .logo {
-    float: left;
-    color: $dark !important;
-    margin-left: 15px;
-    transition: all .5s ease;
-    &:hover {
-        transform: scale(1.05) rotate(1deg);
-    }
+    line-height: 68px;
+    font-weight: 700;
+    padding: 0 0 6px;
+    letter-spacing: 1px;
+    font-size: 20px;
 }
+
+
+
+

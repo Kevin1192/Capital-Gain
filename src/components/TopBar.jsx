@@ -12,13 +12,17 @@ class Topbar extends Component {
     render() {
         return (
             <React.Fragment>
-                <div id='topnav' >
-                    <Container>
+                <header id='topnav' className='defaultscroll'>
+                    <Container >
                         <div>
-                            <Link className='logo' to='/index'><h2>CapitalGainTaxCalculator</h2></Link>
+                            <Link className='logo' to='/index'><div>CapitalGainTaxCalculator</div></Link>
+                        </div>
+                        <div className='auth'>
+                             <Link to='/login' className='btn btn-primary btn-pills'>Login</Link> 
+                             <Link to='/signup' className='btn btn-primary btn-pills'>Signup</Link> 
                         </div>
                     </Container>
-                </div>
+                </header>
             </React.Fragment>
         )
     }
