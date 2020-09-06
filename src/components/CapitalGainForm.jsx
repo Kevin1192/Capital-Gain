@@ -5,11 +5,23 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
+import Container from '@material-ui/core/Container';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { FormControl, OutlinedInput, InputLabel, InputAdornment, makeStyles, Button, Grid } from "@material-ui/core";
 import { MuiPickersUtilsProvider , KeyboardDatePicker } from '@material-ui/pickers';
-
-
+import { ThemeProvider } from '@material-ui/core/styles';
 import {calcuCapitalGainTax} from '../library/capitalGainFunctions';
+
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#02be6e",
+    },
+    contrastThreshold: 3,
+  },
+});
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -18,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
     padding: "30px 10px",
     margin: "10px",
-    border: "1px solid #87CEFA",
+    border: "1px solid #02be6e",
   },
   margin: {
     margin: theme.spacing(2),
@@ -27,39 +39,75 @@ const useStyles = makeStyles((theme) => ({
     color: "#87CEEB",
   },
   report: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
-  }
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
 }));
 
 function CapitalGainForm() {
     const classes = useStyles();
     
   const [values, setValues] = React.useState({
+    id: 0,
     filingStatus: "Single",
     taxableIncome: 0,
     selectedPurchaseDate: new Date(),
     selectedSaleDate: new Date(),
     purchaseAmount: 0,
     saleAmount: 0,
-    capitalGain: 0
+    capitalGain: 0,
+    totalCapitalGainTax: 0,
+    records: [],
   });
   
+  let record = {};
+   let notInclude = ["purchaseAmount", "saleAmount", "records"];
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let totalCG = calcuCapitalGainTax(values);
-    setValues((preState) => ({...values, totalCapitalGainTax: totalCG, capitalGain: (preState.saleAmount - preState.purchaseAmount)}))
+    let totalCGTax = calcuCapitalGainTax(values),
+        CG = values.saleAmount - values.purchaseAmount;
+        setValues((preState) => ({...preState, totalCapitalGainTax: totalCGTax, capitalGain: CG, id: ++preState.id}));
   }
+
+  const initialRender = React.useRef(false);
+
+    React.useEffect(() => {
+      if (!initialRender.current) {
+        console.log('first render')
+        initialRender.current = true;
+        return;
+      }
+      console.log("first");
+      for (const [key, value] of Object.entries(values)) {
+        if (!notInclude.includes(key)) record[key] = value;
+      }
+      setValues((preState) => {
+        console.log('second');
+        let newRecords = preState.records.slice();
+        newRecords.push(record);
+        return {...preState, records: newRecords};
+      })
+    }, [values.totalCapitalGainTax, values.capitalGain, values.id]);
+
   const handleDateChange = (prop) => (date) => {
       setValues({...values, [prop]: date});
   }
   const handleChange = (prop) => (event) => {
     setValues({...values, [prop]: event.target.value});
   };
+
+
+  const tableHeader = ['filingStatus', 'taxableIncome', 'PurchaseDate', 'PurchaseAmount', 'SaleDate', 'SaleAmount', 'CapitalGain', 'totalCapitalGainTax']
+
+  const tableHeaderHtml = tableHeader.map(header => (<th>header</th>))
+  
   return (
     <Fragment>
+    <ThemeProvider theme={theme}>
+    <Container>
       <Grid container fluid spacing={3}>
         <Grid item xs={6}>
           <form onSubmit={handleSubmit} id='calculator'>
@@ -151,13 +199,21 @@ function CapitalGainForm() {
                   />
                 </FormControl>
               </MuiPickersUtilsProvider>
-              <Button type="submit" color="primary" variant="contained">
+              <button type="submit" className="btn btn-primary btn-pills">
                 Submit
-              </Button>
+              </button>
             </Paper>
           </form>
         </Grid>
         <Grid item xs={6} className={classes.report}>
+        <div class='tbl-header'>
+        <table>
+          <thead>
+            <tr>
+              
+            </tr>
+          </thead>
+        </table>
           {values.totalCapitalGainTax === undefined || (
             [<Typography variant="h4" component="h5">
               Your total Capital Gain Tax:{" "}
@@ -172,8 +228,11 @@ function CapitalGainForm() {
               </span>
             </Typography>]
           )}
+          </div>
         </Grid>
       </Grid>
+      </Container>
+      </ThemeProvider>
     </Fragment>
   );
 }
