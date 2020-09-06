@@ -60,9 +60,6 @@ function CapitalGainForm() {
     totalCapitalGainTax: 0,
     records: [],
   });
-  
-  let record = {};
-   let notInclude = ["purchaseAmount", "saleAmount", "records"];
 
 
   const handleSubmit = (evt) => {
@@ -75,22 +72,23 @@ function CapitalGainForm() {
   const initialRender = React.useRef(false);
 
     React.useEffect(() => {
+        let record = {},
+        notInclude = ["purchaseAmount", "saleAmount", "records"];
+
       if (!initialRender.current) {
-        console.log('first render')
         initialRender.current = true;
         return;
       }
-      console.log("first");
       for (const [key, value] of Object.entries(values)) {
         if (!notInclude.includes(key)) record[key] = value;
+        if (key === 'selectedPurchaseDate' || key === 'selectedSaleDate') record[key] = value.toLocaleDateString();
       }
       setValues((preState) => {
-        console.log('second');
         let newRecords = preState.records.slice();
         newRecords.push(record);
         return {...preState, records: newRecords};
       })
-    }, [values.totalCapitalGainTax, values.capitalGain, values.id]);
+    }, [values.id]);
 
   const handleDateChange = (prop) => (date) => {
       setValues({...values, [prop]: date});
@@ -102,8 +100,13 @@ function CapitalGainForm() {
 
   const tableHeader = ['filingStatus', 'taxableIncome', 'PurchaseDate', 'PurchaseAmount', 'SaleDate', 'SaleAmount', 'CapitalGain', 'totalCapitalGainTax']
 
-  const tableHeaderHtml = tableHeader.map(header => (<th>header</th>))
+  const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
   
+  const tableBodyHtml = values.records.length === 0 ? [] : values.records.map(record => {
+  const tbValues = Object.values(record).map((value, idx) => (<td key={idx}>{value}</td>));
+    return (<tr>{tbValues}</tr>);
+  });
+
   return (
     <Fragment>
     <ThemeProvider theme={theme}>
@@ -210,25 +213,21 @@ function CapitalGainForm() {
         <table>
           <thead>
             <tr>
-              
+              {tableHeaderHtml}
             </tr>
           </thead>
         </table>
+        </div>
+        <div className="tbl-content">
+          <table>
+            <tbody>
+                  {tableBodyHtml}
+            </tbody>
+          </table>
+        </div>
           {values.totalCapitalGainTax === undefined || (
-            [<Typography variant="h4" component="h5">
-              Your total Capital Gain Tax:{" "}
-              <span className={classes.taxHighlight}>
-                ${values.totalCapitalGainTax}
-              </span>
-              </Typography>,
-              <Typography variant="h4" component="h5">
-              Your total Capital Gain after tax:{" "}
-              <span className={classes.taxHighlight}>
-                ${values.capitalGain - values.totalCapitalGainTax}
-              </span>
-            </Typography>]
+            <div>1</div>
           )}
-          </div>
         </Grid>
       </Grid>
       </Container>
