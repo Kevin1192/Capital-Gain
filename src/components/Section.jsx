@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Badge } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 import img from '../assets/imgs/moneygrow-nobg.png';
 
 
@@ -11,15 +11,18 @@ class Section extends Component {
                 <section className="bg-half-170 w-100 overflow-hidden">
                     <Container>
                         <Row>
-                            <Col lg="7" md="6">
+                            <Col md="6">
                                 <div className="title-heading">
-                                    <h1 className="heading mb-3">We help to build <br/> the project</h1>
-                                    <p></p>
+                                    <h1 className="heading mb-3">The Simple Capital Gain<br/>Tax Calculator</h1>
+                                    <p className='text-muted'>It accounts for your taxable income and filing status and calculates the capital gains taxed progressively.</p>
+                                    <a className="btn btn-primary btn-pills" href="#calculator">Try it Now!</a>
                                 </div>
                             </Col>
-                            <Col lg="5" md="6" className="mt-4 pt-2 mt-sm-0 pt-sm-0">
-                                <div className="">
+                            <Col md="6" className="mt-4 pt-2 mt-sm-0 pt-sm-0">
+                                <div className="classic-saas-image position-relative">
+                                    <div className="bg-saas-shape position-relative">
                                     <img src={img} className="sectionimg d-block" alt="stock up" />
+                                    </div>
                                 </div>
                             </Col>
                         </Row>

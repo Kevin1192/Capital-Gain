@@ -62,7 +62,7 @@ function CapitalGainForm() {
     <Fragment>
       <Grid container fluid spacing={3}>
         <Grid item xs={6}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} id='calculator'>
             <Paper className={classes.root}>
               <Typography variant="h4" component="h6">
                 Personal Info
