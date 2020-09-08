@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
   },
+  mxauto: {
+    margin: 'auto',
+  }
 }));
 
 function CapitalGainForm() {
@@ -58,6 +61,7 @@ function CapitalGainForm() {
     saleAmount: 0,
     capitalGain: 0,
     totalCapitalGainTax: 0,
+    capitalGainAfterTax: 0,
     records: [],
   });
 
@@ -66,7 +70,7 @@ function CapitalGainForm() {
     evt.preventDefault();
     let totalCGTax = calcuCapitalGainTax(values),
         CG = values.saleAmount - values.purchaseAmount;
-        setValues((preState) => ({...preState, totalCapitalGainTax: totalCGTax, capitalGain: CG, id: ++preState.id}));
+        setValues((preState) => ({...preState, totalCapitalGainTax: totalCGTax, capitalGain: CG, capitalGainAfterTax: (CG - totalCGTax), id: preState.id+1}));
   }
 
   const initialRender = React.useRef(false);
@@ -98,7 +102,7 @@ function CapitalGainForm() {
   };
 
 
-  const tableHeader = ['filingStatus', 'taxableIncome', 'PurchaseDate', 'PurchaseAmount', 'SaleDate', 'SaleAmount', 'CapitalGain', 'totalCapitalGainTax']
+  const tableHeader = ['id', 'filingStatus', 'taxableIncome', 'PurchaseDate', 'SaleDate', 'CapitalGain', 'totalCapitalGainTax', 'CapitalGainAfterTax']
 
   const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
   
@@ -109,128 +113,129 @@ function CapitalGainForm() {
 
   return (
     <Fragment>
-    <ThemeProvider theme={theme}>
-    <Container>
-      <Grid container fluid spacing={3}>
-        <Grid item xs={6}>
-          <form onSubmit={handleSubmit} id='calculator'>
-            <Paper className={classes.root}>
-              <Typography variant="h4" component="h6">
-                Personal Info
-              </Typography>
-              <TextField
-                className={classes.margin}
-                id="filing-status"
-                select
-                label="Filing Status"
-                helperText="Please select your filing status"
-                value={values.filingStatus}
-                onChange={handleChange("filingStatus")}
-                variant="outlined"
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Grid container fluid style={{ "background-color": "#f8f9fc" }}>
+            <Grid item lg={4}>
+              <form
+                onSubmit={handleSubmit}
+                id="calculator"
+                style={{ padding: "20px 0" }}
               >
-                <MenuItem value="Single">Single</MenuItem>
-                <MenuItem value="Head of Household">Head of Household</MenuItem>
-                <MenuItem value="Married jointly">Married jointly</MenuItem>
-                <MenuItem value="Married separately">
-                  Married separately
-                </MenuItem>
-              </TextField>
+                <Paper className={classes.root} style={{ margin: "auto" }}>
+                  <Typography variant="h4" component="h6">
+                    Personal Info
+                  </Typography>
+                  <TextField
+                    className={classes.margin}
+                    id="filing-status"
+                    select
+                    label="Filing Status"
+                    helperText="Please select your filing status"
+                    value={values.filingStatus}
+                    onChange={handleChange("filingStatus")}
+                    variant="outlined"
+                  >
+                    <MenuItem value="Single">Single</MenuItem>
+                    <MenuItem value="Head of Household">
+                      Head of Household
+                    </MenuItem>
+                    <MenuItem value="Married jointly">Married jointly</MenuItem>
+                    <MenuItem value="Married separately">
+                      Married separately
+                    </MenuItem>
+                  </TextField>
 
-              <FormControl variant="outlined" className={classes.margin}>
-                <InputLabel htmlFor="outlined-adornment-taxableIncome">
-                  Taxable Income
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-taxableIncome"
-                  value={values.taxableIncome}
-                  onChange={handleChange("taxableIncome")}
-                  startAdornment={
-                    <InputAdornment position="start">$</InputAdornment>
-                  }
-                  labelWidth={120}
-                />
-              </FormControl>
-              <Typography variant="h4" component="h6">
-                Capital Gain
-              </Typography>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="purchase-date-dialog"
-                  label="Purchase Date"
-                  format="MM/dd/yyyy"
-                  value={values.selectedPurchaseDate}
-                  onChange={handleDateChange("selectedPurchaseDate")}
-                />
+                  <FormControl variant="outlined" className={classes.margin}>
+                    <InputLabel htmlFor="outlined-adornment-taxableIncome">
+                      Taxable Income
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-taxableIncome"
+                      value={values.taxableIncome}
+                      onChange={handleChange("taxableIncome")}
+                      startAdornment={
+                        <InputAdornment position="start">$</InputAdornment>
+                      }
+                      labelWidth={120}
+                    />
+                  </FormControl>
+                  <Typography variant="h4" component="h6">
+                    Capital Gain
+                  </Typography>
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="purchase-date-dialog"
+                      label="Purchase Date"
+                      format="MM/dd/yyyy"
+                      value={values.selectedPurchaseDate}
+                      onChange={handleDateChange("selectedPurchaseDate")}
+                    />
 
-                <FormControl variant="outlined" className={classes.margin}>
-                  <InputLabel htmlFor="outlined-adornment-purchaseamount">
-                    Purchase Amount
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-purchaseamount"
-                    value={values.purchaseAmount}
-                    onChange={handleChange("purchaseAmount")}
-                    startAdornment={
-                      <InputAdornment position="start">$</InputAdornment>
-                    }
-                    labelWidth={120}
-                  />
-                </FormControl>
+                    <FormControl variant="outlined" className={classes.margin}>
+                      <InputLabel htmlFor="outlined-adornment-purchaseamount">
+                        Purchase Amount
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-purchaseamount"
+                        value={values.purchaseAmount}
+                        onChange={handleChange("purchaseAmount")}
+                        startAdornment={
+                          <InputAdornment position="start">$</InputAdornment>
+                        }
+                        labelWidth={120}
+                      />
+                    </FormControl>
 
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="sale-date-dialog"
-                  label="Sale Date"
-                  format="MM/dd/yyyy"
-                  value={values.selectedSaleDate}
-                  onChange={handleDateChange("selectedSaleDate")}
-                />
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="sale-date-dialog"
+                      label="Sale Date"
+                      format="MM/dd/yyyy"
+                      value={values.selectedSaleDate}
+                      onChange={handleDateChange("selectedSaleDate")}
+                    />
 
-                <FormControl variant="outlined" className={classes.margin}>
-                  <InputLabel htmlFor="outlined-adornment-saleAmount">
-                    Sale Amount
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-saleAmount"
-                    value={values.saleAmount}
-                    onChange={handleChange("saleAmount")}
-                    startAdornment={
-                      <InputAdornment position="start">$</InputAdornment>
-                    }
-                    labelWidth={120}
-                  />
-                </FormControl>
-              </MuiPickersUtilsProvider>
-              <button type="submit" className="btn btn-primary btn-pills">
-                Submit
-              </button>
-            </Paper>
-          </form>
-        </Grid>
-        <Grid item xs={6} className={classes.report}>
-        <div class='tbl-header'>
-        <table>
-          <thead>
-            <tr>
-              {tableHeaderHtml}
-            </tr>
-          </thead>
-        </table>
-        </div>
-        <div className="tbl-content">
-          <table>
-            <tbody>
-                  {tableBodyHtml}
-            </tbody>
-          </table>
-        </div>
-          {values.totalCapitalGainTax === undefined || (
-            <div>1</div>
-          )}
-        </Grid>
-      </Grid>
-      </Container>
+                    <FormControl variant="outlined" className={classes.margin}>
+                      <InputLabel htmlFor="outlined-adornment-saleAmount">
+                        Sale Amount
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-saleAmount"
+                        value={values.saleAmount}
+                        onChange={handleChange("saleAmount")}
+                        startAdornment={
+                          <InputAdornment position="start">$</InputAdornment>
+                        }
+                        labelWidth={120}
+                      />
+                    </FormControl>
+                  </MuiPickersUtilsProvider>
+                  <button type="submit" className="btn btn-primary btn-pills">
+                    Submit
+                  </button>
+                </Paper>
+              </form>
+            </Grid>
+            <Grid item lg={8} className={classes.report}>
+              {values.totalCapitalGainTax === undefined || [
+                <Typography variant="h4" component="h5">
+                  Your total Capital Gain Tax:{" "}
+                  <span className={classes.taxHighlight}>
+                    ${values.totalCapitalGainTax}
+                  </span>
+                </Typography>,
+                <Typography variant="h4" component="h5">
+                  Your total Capital Gain after tax:{" "}
+                  <span className={classes.taxHighlight}>
+                    ${values.capitalGain - values.totalCapitalGainTax}
+                  </span>
+                </Typography>,
+              ]}
+            </Grid>
+          </Grid>
+        </Container>
       </ThemeProvider>
     </Fragment>
   );

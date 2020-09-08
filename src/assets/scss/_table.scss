@@ -1,0 +1,46 @@
+table {
+    width: 100%;
+    table-layout: auto;
+    display: table;
+    margin: auto;
+    overflow: auto;
+
+}
+
+
+th {
+    padding: 20px 20px;
+    text-align: left;
+    font-weight: 900;
+    font-size: 12px;
+    color: rgb(3, 8, 0);
+    width: 80px;
+}
+
+td{
+    padding: 20px 20px;
+    text-align: left;
+    font-weight: 800;
+    font-size: 12px;
+    color: rgba(1, 10, 2, 0.9);
+    border-bottom: solid 1px;
+    width: 80px;
+}
+
+
+.table-responsive {
+    min-height: .01%;
+    overflow: auto;
+    height: 300px;
+}
+
+table > tbody > tr:hover {
+    background-color: rgb(208, 245, 220);;
+}
+
+.tbl-header {
+    overflow: scroll;
+}
+.tbl-content {
+    overflow: scroll;
+}
