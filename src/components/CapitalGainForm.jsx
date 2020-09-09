@@ -36,7 +36,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   taxHighlight: {
-    color: "#87CEEB",
+    color: "#02be6e",
+  },
+  taxHighlightred: {
+    color: 'red',
   },
   report: {
     display: "flex",
@@ -44,8 +47,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   mxauto: {
-    margin: 'auto',
-  }
+    margin: "auto",
+  },
 }));
 
 function CapitalGainForm() {
@@ -116,7 +119,7 @@ function CapitalGainForm() {
       <ThemeProvider theme={theme}>
         <Container>
           <Grid container fluid style={{ "background-color": "#f8f9fc" }}>
-            <Grid item lg={4}>
+            <Grid item lg={4} style={{'margin': 'auto'}}>
               <form
                 onSubmit={handleSubmit}
                 id="calculator"
@@ -228,10 +231,10 @@ function CapitalGainForm() {
                 </Typography>,
                 <Typography variant="h4" component="h5">
                   Your total Capital Gain after tax:{" "}
-                  <span className={classes.taxHighlight}>
-                    ${values.capitalGain - values.totalCapitalGainTax}
+                  <span className={values.capitalGainAfterTax >= 0 ? classes.taxHighlight : classes.taxHighlightred}>
+                    ${values.capitalGainAfterTax}
                   </span>
-                </Typography>,
+                </Typography>
               ]}
             </Grid>
           </Grid>
