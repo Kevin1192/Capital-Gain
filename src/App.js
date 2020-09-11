@@ -4,6 +4,7 @@ import './assets/css/default.css';
 import './App.scss';
 import CapitalGainForm from './components/CapitalGainForm';
 import TopBar from './components/TopBar';
+import Example from './components/Example';
 import Section from './components/Section';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 
@@ -37,12 +38,12 @@ class App extends Component {
   render() {
   return (
     <React.Fragment>
-    <Router>
-<TopBar />
-    <Section />
-      <CapitalGainForm />
-    </Router>
-      
+      <Router>
+        <TopBar />
+        <Section />
+        <Example />
+        <CapitalGainForm />
+      </Router>
     </React.Fragment>
   );
 }
