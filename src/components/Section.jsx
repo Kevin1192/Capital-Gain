@@ -8,7 +8,7 @@ class Section extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className="bg-half-170 w-100 overflow-hidden">
+                <section className="bg-half-170 w-100 overflow-hidden" id="home">
                     <Container>
                         <Row>
                             <Col md="6">

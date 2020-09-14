@@ -1,0 +1,48 @@
+.assumption {
+    font-weight: 700;
+    font-size: 15px;
+    color: rgb(6, 212, 144);
+}
+
+.calculation {
+    font-weight: 700;
+    font-size: 15px;
+    color: rgb(68, 177, 68);
+}
+
+.transition {
+    transition: all 0.3s ease-in-out;
+}
+
+.casecard {
+    position: relative;
+    z-index: 1;
+    border-bottom: 3px solid #adb5db;
+}
+
+.shadow {
+    box-shadow: 0 0 3px rgba(60, 72, 88, 0.15);
+}
+
+.rounded {
+    border-radius: 15px !important;
+}
+
+.card .casepadding{
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.card:hover {
+    position: relative;
+    bottom: 6px;
+}
+
+.card {
+    position: relative;
+    bottom: 0px;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
