@@ -8,7 +8,14 @@ class Topbar extends Component {
     super(props);
     this.state = {
         isOpen : false,
+        navItems : [
+            { id: 1, idnm: "home", navheading: "HOME" },
+            { id: 2, idnm: "cases", navheading: "CASES" },
+            { id: 3, idnm: "calculator", navheading: "CALCULATOR" },
+
+        ]
     }
+    this.toggleLine = this.toggleLine.bind(this);
     };
 
     toggleLine() {
@@ -24,8 +31,14 @@ class Topbar extends Component {
                         <div>
                             <Link className='logo' to='/'><div>CapitalGainTaxCalculator</div></Link>
                         </div>
-                        <div>
-                            <a href="#home">Home</a>
+                        <div id="navigation" style= {{ display : this.state.isOpen ? "block" : "none" }}>
+                            <ul className="navigation-menu">
+                                {this.state.navItems.map((item, key) => (
+                                    <li key={key} className={item.navheading === "Home" ? "has-submenu active" : "has-submenu"} >
+                                        <a href={"/" + item.idnm}> {item.navheading}</a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                         <div className="menu-extras">
                             <div className="menu-item">
@@ -38,10 +51,10 @@ class Topbar extends Component {
                                 </Link>
                             </div>
                         </div>
-                        <div className='auth'>
+                        {/* <div className='auth'>
                              <Link to='/login' className='btn btn-primary btn-pills'>Login</Link> 
                              <Link to='/signup' className='btn btn-primary btn-pills'>Signup</Link> 
-                        </div>
+                        </div> */}
                     </Container>
                 </header>
             </React.Fragment>
