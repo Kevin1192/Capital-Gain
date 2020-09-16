@@ -34,7 +34,7 @@ class Topbar extends Component {
                         <div id="navigation" style= {{ display : this.state.isOpen ? "block" : "none" }}>
                             <ul className="navigation-menu">
                                 {this.state.navItems.map((item, key) => (
-                                    <li key={key} className={item.navheading === "Home" ? "has-submenu active" : "has-submenu"} >
+                                    <li key={key} className={item.navheading === "HOME" ? "has-submenu active" : "has-submenu"} >
                                         <a href={"/" + item.idnm}> {item.navheading}</a>
                                     </li>
                                 ))}
