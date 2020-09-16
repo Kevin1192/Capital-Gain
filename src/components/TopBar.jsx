@@ -25,40 +25,58 @@ class Topbar extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <header id='topnav' className='defaultscroll'>
-                    <Container >
-                        <div>
-                            <Link className='logo' to='/'><div>CapitalGainTaxCalculator</div></Link>
-                        </div>
-                        <div id="navigation" style= {{ display : this.state.isOpen ? "block" : "none" }}>
-                            <ul className="navigation-menu">
-                                {this.state.navItems.map((item, key) => (
-                                    <li key={key} className={item.navheading === "HOME" ? "has-submenu active" : "has-submenu"} >
-                                        <a href={"/" + item.idnm}> {item.navheading}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="menu-extras">
-                            <div className="menu-item">
-                                <Link to="#" onClick= { this.toggleLine } className={ this.state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
-                                    <div className="lines">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                        {/* <div className='auth'>
+          <React.Fragment>
+            <header id="topnav" className="defaultscroll">
+              <Container>
+                <div>
+                  <Link className="logo" to="/">
+                    <div>CapitalGainTaxCalculator</div>
+                  </Link>
+                </div>
+                <div
+                  id="navigation"
+                  style={{ display: this.state.isOpen ? "block" : "none" }}
+                >
+                  <ul className="navigation-menu">
+                    {this.state.navItems.map((item, key) => (
+                      <li key={key} className="has-submenu">
+                        <a
+                          href={"/" + item.idnm}
+                          className="nav-heading-before"
+                        >
+                          {item.navheading}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="menu-extras">
+                  <div className="menu-item">
+                    <Link
+                      to="#"
+                      onClick={this.toggleLine}
+                      className={
+                        this.state.isOpen
+                          ? "navbar-toggle open"
+                          : "navbar-toggle"
+                      }
+                    >
+                      <div className="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className='auth'>
                              <Link to='/login' className='btn btn-primary btn-pills'>Login</Link> 
                              <Link to='/signup' className='btn btn-primary btn-pills'>Signup</Link> 
                         </div> */}
-                    </Container>
-                </header>
-            </React.Fragment>
-        )
+              </Container>
+            </header>
+          </React.Fragment>
+        );
     }
 }
 
