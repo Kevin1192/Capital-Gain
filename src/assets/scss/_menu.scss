@@ -41,24 +41,6 @@
   }
   .has-submenu {
     position: relative;
-    .nav-heading-before::after {
-        left: 0;
-        right: 0;
-        content: "";
-        height: 2px;
-        bottom: 0px;
-        position: relative;
-        background: rgb(236, 135, 151);
-        position: absolute;
-        transform-origin: 0 100%;
-        transform: scaleX(0);
-        transition: all 0.3s ease-in-out;
-      }
-    &:hover {
-      .nav-heading-before::after {
-        transform: scaleX(1);
-      }
-    }
     .submenu {
       .submenu-arrow {
         border: solid $dark;
@@ -364,8 +346,8 @@
           }
         }
         > a {
-          padding-top: 25px;
-          padding-bottom: 25px;
+          margin-top: 25px;
+          margin-bottom: 25px;
           min-height: 62px;
         }
       }
