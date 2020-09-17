@@ -119,7 +119,7 @@ function CapitalGainForm() {
       <ThemeProvider theme={theme}>
         <Container>
           <Grid container fluid style={{ "background-color": "#f8f9fc" }}>
-            <Grid item lg={4} style={{'margin': 'auto'}}>
+            <Grid item lg={4} style={{ margin: "auto" }}>
               <form
                 onSubmit={handleSubmit}
                 id="calculator"
@@ -222,6 +222,25 @@ function CapitalGainForm() {
               </form>
             </Grid>
             <Grid item lg={8} className={classes.report}>
+              <div>
+                <div className="tbl-header">
+                  <table>
+                    <thead>
+                      <tr>{tableHeaderHtml}</tr>
+                    </thead>
+                  </table>
+                </div>
+                <div className="tbl-content table-responsive">
+                  <table>
+                  <thead>
+                    <tr>
+                      {tableHeaderHtml}
+                    </tr>
+                  </thead>
+                    <tbody>{tableBodyHtml}</tbody>
+                  </table>
+                </div>
+              </div>
               {values.totalCapitalGainTax === undefined || [
                 <Typography variant="h4" component="h5">
                   Your total Capital Gain Tax:{" "}
@@ -231,10 +250,16 @@ function CapitalGainForm() {
                 </Typography>,
                 <Typography variant="h4" component="h5">
                   Your total Capital Gain after tax:{" "}
-                  <span className={values.capitalGainAfterTax >= 0 ? classes.taxHighlight : classes.taxHighlightred}>
+                  <span
+                    className={
+                      values.capitalGainAfterTax >= 0
+                        ? classes.taxHighlight
+                        : classes.taxHighlightred
+                    }
+                  >
                     ${values.capitalGainAfterTax}
                   </span>
-                </Typography>
+                </Typography>,
               ]}
             </Grid>
           </Grid>
