@@ -28,9 +28,9 @@ class Topbar extends Component {
             <header id="topnav" className="defaultscroll">
               <Container>
                 <div>
-                  <Link className="logo" to="/">
+                  <a className="logo" href="#home">
                     <div>CapitalGainTaxCalculator</div>
-                  </Link>
+                  </a>
                 </div>
                 <div
                   id="navigation"
