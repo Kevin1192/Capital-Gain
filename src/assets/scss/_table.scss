@@ -1,13 +1,26 @@
 table {
     width: 100%;
     table-layout: auto;
-    display: table;
+    display: block;
     margin: auto;
-    overflow: auto;
-
+    overflow-x: scroll;
 }
 
+thead, tbody {
+    display: block;
+}
 
+tbody {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 300px;
+}
+td, th {
+    min-width: 180px;
+    height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 th {
     padding: 20px 20px;
     text-align: left;
@@ -27,20 +40,6 @@ td{
     width: 80px;
 }
 
-
-.table-responsive {
-    min-height: .01%;
-    overflow: auto;
-    height: 300px;
-}
-
 table > tbody > tr:hover {
     background-color: rgb(208, 245, 220);;
-}
-
-.tbl-header {
-    overflow: scroll;
-}
-.tbl-content {
-    overflow: scroll;
 }

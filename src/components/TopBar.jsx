@@ -12,7 +12,6 @@ class Topbar extends Component {
             { id: 1, idnm: "home", navheading: "HOME" },
             { id: 2, idnm: "cases", navheading: "CASES" },
             { id: 3, idnm: "calculator", navheading: "CALCULATOR" },
-
         ]
     }
     this.toggleLine = this.toggleLine.bind(this);
@@ -41,7 +40,7 @@ class Topbar extends Component {
                     {this.state.navItems.map((item, key) => (
                       <li key={key} className="has-submenu">
                         <a
-                          href={"/" + item.idnm}
+                          href={"#" + item.idnm}
                           className="nav-heading-before"
                         >
                           {item.navheading}

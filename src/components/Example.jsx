@@ -27,7 +27,7 @@ function Example() {
     let cases = [case1, case2];
     return (
         <React.Fragment>
-                <Container>
+                <Container id="cases">
                 <div className="text-center">
                 <Row className=""><Col><h1>Cases</h1></Col></Row>
                     <Row>

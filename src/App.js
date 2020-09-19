@@ -9,19 +9,24 @@ import Section from './components/Section';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-
     window.addEventListener("scroll", this.scrollNavigation, true);
+    document.querySelector("table").addEventListener("scroll", this.scrollTable,true);
   }
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.scrollNavigation, true);
+  }
+
+  scrollTable = () => {
+    let content = document.querySelector("tbody");
+       content.style.width = document.querySelector("table").clientWidth +
+      document.querySelector("table").scrollLeft + "px";
   }
 
   scrollNavigation = () => {

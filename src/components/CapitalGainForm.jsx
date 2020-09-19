@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    width:  "95%",
   },
   mxauto: {
     margin: "auto",
@@ -222,14 +223,7 @@ function CapitalGainForm() {
               </form>
             </Grid>
             <Grid item lg={8} className={classes.report}>
-              <div>
-                <div className="tbl-header">
-                  <table>
-                    <thead>
-                      <tr>{tableHeaderHtml}</tr>
-                    </thead>
-                  </table>
-                </div>
+
                 <div className="tbl-content table-responsive">
                   <table>
                   <thead>
@@ -240,7 +234,7 @@ function CapitalGainForm() {
                     <tbody>{tableBodyHtml}</tbody>
                   </table>
                 </div>
-              </div>
+              <div style= {{"padding-bottom" : "60px", "padding-left" : "30px"}}>
               {values.totalCapitalGainTax === undefined || [
                 <Typography variant="h4" component="h5">
                   Your total Capital Gain Tax:{" "}
@@ -248,7 +242,7 @@ function CapitalGainForm() {
                     ${values.totalCapitalGainTax}
                   </span>
                 </Typography>,
-                <Typography variant="h4" component="h5">
+                <Typography variant="h4" component="h5"> 
                   Your total Capital Gain after tax:{" "}
                   <span
                     className={
@@ -261,6 +255,7 @@ function CapitalGainForm() {
                   </span>
                 </Typography>,
               ]}
+              </div>
             </Grid>
           </Grid>
         </Container>
