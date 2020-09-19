@@ -21,6 +21,7 @@ class App extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.scrollNavigation, true);
+    document.querySelector("table").removeEventListener("scroll", this.scrollTable, true);
   }
 
   scrollTable = () => {

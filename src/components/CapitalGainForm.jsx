@@ -234,7 +234,7 @@ function CapitalGainForm() {
                     <tbody>{tableBodyHtml}</tbody>
                   </table>
                 </div>
-              <div style= {{"padding-bottom" : "60px", "padding-left" : "30px"}}>
+              <div style= {{"padding" : "40px 0px 60px 30px"}}>
               {values.totalCapitalGainTax === undefined || [
                 <Typography variant="h4" component="h5">
                   Your total Capital Gain Tax:{" "}
