@@ -6,14 +6,10 @@ import CapitalGainForm from './components/CapitalGainForm';
 import TopBar from './components/TopBar';
 import Example from './components/Example';
 import Section from './components/Section';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     window.addEventListener("scroll", this.scrollNavigation, true);
     document.querySelector("table").addEventListener("scroll", this.scrollTable,true);

@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Container from '@material-ui/core/Container';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { FormControl, OutlinedInput, InputLabel, InputAdornment, makeStyles, Button, Grid } from "@material-ui/core";
+import { FormControl, OutlinedInput, InputLabel, InputAdornment, makeStyles, Grid } from "@material-ui/core";
 import { MuiPickersUtilsProvider , KeyboardDatePicker } from '@material-ui/pickers';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {calcuCapitalGainTax} from '../library/capitalGainFunctions';

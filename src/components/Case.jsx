@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, CardBody } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 
 
 function Case({caseEach}) {
