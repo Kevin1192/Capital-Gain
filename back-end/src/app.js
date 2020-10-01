@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+
+// delete
 app.get('/', (req, res, next) => {
     return res.json({
         text: 'hello, success'
