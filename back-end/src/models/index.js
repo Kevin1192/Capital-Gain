@@ -15,4 +15,4 @@ sequelize
 
 
 module.exports.User = require('./user');
-module.exports.Record = require('./record');
+// module.exports.Record = require('./record');
