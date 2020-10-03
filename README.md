@@ -11,9 +11,9 @@ In Development.
 
 Capital Gain
 
---Long Term
+- Long Term
 
---Short Term
+- Short Term
 
 Filing status:
 
