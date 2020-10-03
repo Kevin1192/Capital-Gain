@@ -17,7 +17,10 @@ Capital Gain
 
 Filing status:
 
-Single
-Head of Household
-Married Jointly
-Married Separately
+- Single
+
+- Head of Household
+
+- Married Jointly
+
+- Married Separately
