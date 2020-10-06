@@ -24,3 +24,11 @@ Filing status:
 - Married Jointly
 
 - Married Separately
+
+
+### Back-End:
+- NodeJS
+- PostgressSQL
+- Sequelize
+
+
