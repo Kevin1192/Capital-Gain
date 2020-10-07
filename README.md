@@ -37,3 +37,9 @@ Filing status:
 - Bootstrap
 
 
+## Instructions
+#### For testing
+To start the program, run `npm install` after cloning the repository to local.
+Then use `npm start` to start the front-end webpage.
+
+
