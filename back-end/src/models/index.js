@@ -3,6 +3,10 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('postgres://zhouk:691208@localhost:5432/mydb');
 
 module.exports.sequelize = sequelize;
+const User = require('./user');
+const Record = require('./record');
+User.hasMany(Record);
+Record.belongsTo(User);
 
 sequelize
 .authenticate()
@@ -14,5 +18,5 @@ sequelize
 })
 
 
-module.exports.User = require('./user');
-// module.exports.Record = require('./record');
+module.exports.User = User;
+module.exports.Record = Record;
