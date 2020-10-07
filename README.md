@@ -31,4 +31,9 @@ Filing status:
 - PostgressSQL
 - Sequelize
 
+### Front-End:
+- React
+- Material-UI
+- Bootstrap
+
 
