@@ -45,7 +45,6 @@ exports.signup = async function (req, res, next) {
         let bodyObj = {...req.body, password: hash };
         console.log(bodyObj);
         let user = await db.User.create({...req.body, password: hash });
-        console.log('work 2');
         let { id, username } = user;
         let token = jwt.sign(
             {
@@ -54,7 +53,6 @@ exports.signup = async function (req, res, next) {
             },
             process.env.SECRET_KEY
         );
-        console.log('work 3')
         return res.status(200).json({
             id,
             username,

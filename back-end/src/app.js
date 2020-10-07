@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = 3001;
 const authRoutes = require('./routes/auth');
+const recordRoutes = require('./routes/record')
 const db = require('./models/index');
 const errorHandler = require('./controllers/error');
 
@@ -25,6 +26,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes);
+app.use('/api/record', recordRoutes);
 
 app.use(function(req, res, next) {
     let err = new Error('Not Found');
