@@ -40,12 +40,24 @@ exports.signin = async function(req, res, next) {
 
 exports.signup = async function (req, res, next) {
     try {
+
+        let userExists = await db.User.findOne({ where: { username: req.body.username }});
+
+        console.log(userExists);
+        if (userExists) {
+            return next({
+                status: 400,
+                message: "Sorry, the username is already taken, please try another username"
+            })
+        }
+
+
         let hash = await bcrypt.hash(req.body.password, 10);
 
-        console.log(hash);
+
         let bodyObj = {...req.body, password: hash };
         console.log(bodyObj);
-        let user = await db.User.create({...req.body, password: hash });
+        let user = await db.User.create(bodyObj);
         let { id, username } = user;
         let token = jwt.sign(
             {

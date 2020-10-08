@@ -8,6 +8,9 @@ const authRoutes = require('./routes/auth');
 const recordRoutes = require('./routes/record')
 const db = require('./models/index');
 const errorHandler = require('./controllers/error');
+const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
+const { getRecords } = require('./controllers/record');
+
 
 require('dotenv').config();
 
@@ -26,7 +29,12 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes);
-app.use('/api/record', recordRoutes);
+app.use('/api/users/:id/messages', loginRequired, ensureCorrectUser, recordRoutes);
+
+app.get("/api/messages", getRecords);
+
+
+
 
 app.use(function(req, res, next) {
     let err = new Error('Not Found');
