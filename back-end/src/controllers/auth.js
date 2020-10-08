@@ -4,12 +4,10 @@ const jwt = require('jsonwebtoken');
 
 exports.signin = async function(req, res, next) {
     try {
-        let user = db.User.findOne({ where: { username: req.body.username }});
-        
+        let user = await db.User.findOne({ where: { username: req.body.username }});
         let { id, username } = user;
 
         let isMatch = await bcrypt.compare(req.body.password, user.password);
-
         if (isMatch) {
             let token = jwt.sign(
                 {
@@ -26,7 +24,7 @@ exports.signin = async function(req, res, next) {
         } else {
             return next({
                 status: 400,
-                message: "Invalid email/password",
+                message: "Invalid username/password",
             })
         }
 
