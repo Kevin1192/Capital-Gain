@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './assets/css/default.css';
 import './App.scss';
-import CapitalGainForm from './components/CapitalGainForm';
 import TopBar from './components/TopBar';
-import Example from './components/Example';
-import Section from './components/Section';
 import { BrowserRouter as Router} from 'react-router-dom';
 
-
+// pages
+import Landing from './pages/landing';
 class App extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.scrollNavigation, true);
@@ -42,9 +40,7 @@ class App extends Component {
     <React.Fragment>
       <Router>
         <TopBar />
-        <Section />
-        <Example />
-        <CapitalGainForm />
+        <Landing />
       </Router>
     </React.Fragment>
   );
