@@ -6,7 +6,7 @@ import TopBar from './components/TopBar';
 import { BrowserRouter as Router} from 'react-router-dom';
 
 // pages
-import Landing from './pages/landing';
+import Landing from './pages/Landing';
 class App extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.scrollNavigation, true);

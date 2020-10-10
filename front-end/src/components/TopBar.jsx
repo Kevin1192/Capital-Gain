@@ -36,6 +36,7 @@ class Topbar extends Component {
                   id="navigation"
                   style={{ display: this.state.isOpen ? "block" : "none" }}
                 >
+                  <div className='d-flex justify-content-around align-items-center'>
                   <ul className="navigation-menu">
                     {this.state.navItems.map((item, key) => (
                       <li key={key} className="has-submenu">
@@ -47,7 +48,12 @@ class Topbar extends Component {
                         </a>
                       </li>
                     ))}
-                  </ul>
+                    </ul>
+                <div className='auth-buttons' >
+                             <Link to='/login' className='btn btn-primary btn-pills mx-1 px-3'>Login</Link> 
+                             <Link to='/signup' className='btn btn-primary btn-pills mx-1 px-3'>Signup</Link> 
+                        </div> 
+                    </div>
                 </div>
                 <div className="menu-extras">
                   <div className="menu-item">
@@ -68,10 +74,6 @@ class Topbar extends Component {
                     </Link>
                   </div>
                 </div>
-                {/* <div className='auth'>
-                             <Link to='/login' className='btn btn-primary btn-pills'>Login</Link> 
-                             <Link to='/signup' className='btn btn-primary btn-pills'>Signup</Link> 
-                        </div> */}
               </Container>
             </header>
           </React.Fragment>
