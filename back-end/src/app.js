@@ -29,7 +29,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users/:id/records', loginRequired, ensureCorrectUser, recordRoutes);
+app.use('/api/users/:id/records',  recordRoutes);
 
 app.get("/api/records", getRecords);
 
