@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // pages
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 class App extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.scrollNavigation, true);
@@ -47,6 +48,9 @@ class App extends Component {
           </Route>
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
         </Switch>
       </Router>
