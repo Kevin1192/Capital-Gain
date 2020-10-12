@@ -50,8 +50,8 @@ class Topbar extends Component {
                     ))}
                     </ul>
                 <div className='auth-buttons' >
-                             <Link to='/login' className='btn btn-primary btn-pills mx-1 px-3'>Login</Link> 
-                             <Link to='/signup' className='btn btn-primary btn-pills mx-1 px-3'>Signup</Link> 
+                             <Link to='/login' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Login</Link> 
+                             <Link to='/signup' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Signup</Link> 
                         </div> 
                     </div>
                 </div>

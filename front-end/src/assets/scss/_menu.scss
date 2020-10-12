@@ -381,11 +381,6 @@
       width: auto;
     }
 
-    .auth-button {
-      display: flex;
-      flex-direction: column;
-    }
-
     #navigation {
       max-height: 400px;
     }
@@ -561,6 +556,10 @@
   #topnav {
     .buy-button {
       display: none;
+    }
+    .auth-buttons {
+      display: flex;
+      flex-direction: column;
     }
     .buy-menu-btn {
       display: block !important;
