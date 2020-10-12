@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
-import { use } from '../../../back-end/src/routes/auth';
 
-function Signin() {
+function Login() {
     
 
     return(
         <Fragment>
-            
+            <div>Login</div>
         </Fragment>
     )
 }
+
+
+export default Login;

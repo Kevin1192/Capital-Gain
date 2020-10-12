@@ -3,10 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './assets/css/default.css';
 import './App.scss';
 import TopBar from './components/TopBar';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // pages
 import Landing from './pages/Landing';
+import Login from './pages/Login';
 class App extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.scrollNavigation, true);
@@ -40,7 +41,14 @@ class App extends Component {
     <React.Fragment>
       <Router>
         <TopBar />
-        <Landing />
+        <Switch>
+          <Route exact path="/">
+           <Landing />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+        </Switch>
       </Router>
     </React.Fragment>
   );
