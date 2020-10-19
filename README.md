@@ -42,4 +42,10 @@ Filing status:
 To start the program, run `npm install` after cloning the repository to local.
 Then use `npm start` to start the front-end webpage.
 
+Create your own .env file with SECRET_KEY variable for JsonWebToken auth.
+
+Currently the front-end functions as a stand-alone application.
+
+I may integrate back-end into the front-end and break the app. For functionalities, refer to the demo.
+
 
