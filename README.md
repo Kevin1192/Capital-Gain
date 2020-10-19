@@ -44,4 +44,6 @@ Then use `npm start` to start the front-end webpage.
 
 Create your own .env file with SECRET_KEY variable for JsonWebToken auth.
 
+Currently the front-end functions as a stand-alone application.
+
 
