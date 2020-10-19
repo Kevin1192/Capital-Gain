@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+// sequelize postgress database
 const sequelize = new Sequelize('postgres://zhouk:691208@localhost:5432/mydb');
 
 module.exports.sequelize = sequelize;

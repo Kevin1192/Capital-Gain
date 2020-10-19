@@ -41,9 +41,9 @@ class App extends Component {
   return (
     <React.Fragment>
       <Router>
-        <TopBar />
         <Switch>
           <Route exact path="/">
+            <TopBar />
            <Landing />
           </Route>
           <Route exact path="/login">
