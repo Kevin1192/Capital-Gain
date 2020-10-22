@@ -17,3 +17,17 @@
 .fea {
     stroke-width: 1.8;
 }
+
+.back-to-home {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    z-index: 1;
+}
+
+.back-to-home:hover {
+    .icons {
+        color: white;
+    }
+}
+

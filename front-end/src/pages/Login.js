@@ -10,10 +10,10 @@ function Login() {
 
     return(
         <Fragment>
+                <div className="back-to-home rounded d-none d-sm-block">
+                    <Link to="/" className="btn btn-icon btn-soft-primary"><i><FeatherIcon icon="home" className="icons" /></i></Link>
+                </div>
 
-            <div>
-
-                <Link to='/'></Link>
                 <section className='bg-home d-flex align-items-center'>
                     <Container>
                         <Row className='align-items-center'>
@@ -70,7 +70,6 @@ function Login() {
                         </Row>
                     </Container>
                 </section>
-            </div>
         </Fragment>
     )
 }
