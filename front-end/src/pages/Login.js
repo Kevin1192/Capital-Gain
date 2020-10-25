@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Input, Label, FormGroup, Button, Card, CardBody } from 'reactstrap';
+import { Container, Row, Col, Label, FormGroup, Button, Card, CardBody } from 'reactstrap';
 
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import FeatherIcon from 'feather-icons-react';
 import loginImg from '../assets/imgs/login.svg';
 function Login() {
-    
+
 
     return(
         <Fragment>

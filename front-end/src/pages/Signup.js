@@ -102,7 +102,7 @@ class SignUp extends Component {
                                             </Col>
 
                                             <Col md="12" className="mb-0">
-                                                <Button color="primary" block>Register</Button>
+                                                <Button color="primary" block type='submit'>Register</Button>
                                             </Col>
                                             <Col xs="12" className="text-center">
                                                 <p className="mb-0 mt-3"><small className="text-dark mr-2">Already have an account ?</small> <Link to="/login" className="text-dark font-weight-bold">Login</Link></p>
