@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Container } from 'reactstrap';
-import { UserContext } from '../library/userContext';
+
+
 class Topbar extends Component {
     constructor(props) {
     super(props);
@@ -25,8 +26,6 @@ class Topbar extends Component {
 
 
     render() {
-      let userContext = this.context;
-      console.log(userContext);
         return (
           <React.Fragment>
             <header id="topnav" className="defaultscroll">
@@ -40,6 +39,8 @@ class Topbar extends Component {
                   id="navigation"
                   style={{ display: this.state.isOpen ? "block" : "none" }}
                 >
+
+                  
                   <div className='d-flex justify-content-around align-items-center'>
                   <ul className="navigation-menu">
                     {this.state.navItems.map((item, key) => (
@@ -84,7 +85,5 @@ class Topbar extends Component {
         );
     }
 }
-
-Topbar.contextType = UserContext;
 
 export default withRouter(Topbar);
