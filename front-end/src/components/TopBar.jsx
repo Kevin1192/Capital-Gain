@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Container } from 'reactstrap';
-
+import { UserContext } from '../library/userContext';
 class Topbar extends Component {
     constructor(props) {
     super(props);
@@ -21,8 +21,12 @@ class Topbar extends Component {
         this.setState(preState => ({ isOpen: !preState.isOpen }))
     }
 
+    
+
 
     render() {
+      let userContext = this.context;
+      console.log(userContext);
         return (
           <React.Fragment>
             <header id="topnav" className="defaultscroll">
@@ -80,5 +84,7 @@ class Topbar extends Component {
         );
     }
 }
+
+Topbar.contextType = UserContext;
 
 export default withRouter(Topbar);
