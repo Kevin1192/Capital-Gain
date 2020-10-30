@@ -17,6 +17,9 @@ import Signup from './pages/Signup';
 if (localStorage.jwtToken) {
   setTokenHeader(localStorage.jwtToken);
 
+  
+
+
 }
 
 class App extends Component {
