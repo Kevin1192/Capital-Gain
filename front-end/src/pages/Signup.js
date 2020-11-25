@@ -14,7 +14,7 @@ import signup from '../assets/imgs/signup.svg';
 import { connect } from 'react-redux';
 import { authUser } from '../store/actions/auth';
 
-const SignUp = ({ authUser }) => {
+const SignUp = ({ authUser, errors }) => {
 
     const initialState = {
         username: '',
@@ -116,7 +116,7 @@ const SignUp = ({ authUser }) => {
                                                     />
                                                 </FormGroup>
                                             </Col>
-
+                                            {errors ? <p>{errors.message}</p>: null}
                                             <Col md="12" className="mb-0">
                                                 <Button color="primary" block type='submit'>Register</Button>
                                             </Col>
@@ -136,7 +136,10 @@ const SignUp = ({ authUser }) => {
     }
 
 
+const mapStateToProps = ({ errors }) => ({
+    errors
+})
 const mapDispatchToProps = dispatch => ({
     authUser: (type, userData) => dispatch(authUser(type, userData))
 })
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

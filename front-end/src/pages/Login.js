@@ -7,7 +7,7 @@ import FeatherIcon from 'feather-icons-react';
 import loginImg from '../assets/imgs/login.svg';
 import { authUser } from '../store/actions/auth';
 import { connect } from 'react-redux';
-function Login({ authUser }) {
+function Login({ authUser, errors }) {
 
     
     const initialState = {
@@ -24,6 +24,12 @@ function Login({ authUser }) {
                 password,
             }
             authUser('signin', submitForm)
+            .then(() => {
+                return;
+            })
+            .catch(() => {
+                return;
+            })
         }
 
         const handleChange = (evt) => {
@@ -42,7 +48,7 @@ function Login({ authUser }) {
                         <Row className='align-items-center'>
                             <Col lg='7' md='6'>
                                 <div className='mr-lg-5'>
-                                    <img src={loginImg} className="img-fluid d-block mx-auto" alt="login image" />
+                                    <img src={loginImg} className="img-fluid d-block mx-auto" alt="login" />
                                 </div>
                             </Col>
                             <Col lg='5' md='6' className="mt-4 mt-sm-0 pt-2 pt-sm-0">
@@ -79,6 +85,7 @@ function Login({ authUser }) {
                                                         }} />
                                                     </FormGroup>
                                                 </Col>
+                                                {errors ? <p>{errors.message}</p>: null}
                                                 <Col lg='12'>
                                                     <Button color='primary' block>Sign in</Button>
                                                 </Col>
@@ -97,7 +104,10 @@ function Login({ authUser }) {
     )
 }
 
+const mapStateToProps = ({ errors }) => ({
+    errors
+})
 const mapDispatchToProps = dispatch => ({
     authUser: (type, form) => dispatch(authUser(type, form))
 })
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
