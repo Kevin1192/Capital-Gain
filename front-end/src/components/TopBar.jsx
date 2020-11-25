@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
 
 
 class Topbar extends Component {
@@ -23,9 +24,8 @@ class Topbar extends Component {
     }
 
     
-
-
     render() {
+      const { currentUser } = this.props;
         return (
           <React.Fragment>
             <header id="topnav" className="defaultscroll">
@@ -54,12 +54,16 @@ class Topbar extends Component {
                       </li>
                     ))}
                     </ul>
+
+                    {currentUser.isAuthenticated ? <p>{currentUser.user.username}</p> : 
                 <div className='auth-buttons' >
                              <Link to='/login' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Login</Link> 
                              <Link to='/signup' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Signup</Link> 
                         </div> 
+    }
                     </div>
                 </div>
+                    
                 <div className="menu-extras">
                   <div className="menu-item">
                     <Link
@@ -86,4 +90,8 @@ class Topbar extends Component {
     }
 }
 
-export default withRouter(Topbar);
+const mapStateToProps = ({ currentUser}) => ({
+    currentUser
+});
+
+export default connect(mapStateToProps)(withRouter(Topbar));

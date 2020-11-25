@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Col} from 'reactstrap';
 import img from '../assets/imgs/moneygrow-nobg.png';
 
 
 class Section extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
+        const { currentUser } = this.props;
+        console.log(currentUser);
         return (
             <React.Fragment>
                 <section className="bg-half-170 w-100 overflow-hidden" id="home">
@@ -32,4 +38,7 @@ class Section extends Component {
     }
 }
 
-export default Section;
+const mapStateToProps = ({ currentUser}) => ({
+    currentUser
+})
+export default connect(mapStateToProps)(Section);

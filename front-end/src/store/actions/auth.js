@@ -22,7 +22,9 @@ export function logout() {
 export const authUser = (type, userData) => {
     return dispatch => {
         return new Promise((resolve, reject) => {
-            return apiCall("post", `/api/auth/${type}`, userData)
+            // api/auth/signup  api/auth/signin
+            const localHost = 'http://localhost:3001';
+            return apiCall("post", `${localHost}/api/auth/${type}`, userData)
             .then(({ token, ...user }) => {
                 localStorage.setItem("jwtToken", token);
                 setTokenHeader(token);
