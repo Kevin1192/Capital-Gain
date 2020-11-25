@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-
+import { setCurrentUser } from '../store/actions/auth';
 
 class Topbar extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class Topbar extends Component {
 
     
     render() {
-      const { currentUser } = this.props;
+      const { currentUser, setCurrentUser } = this.props;
         return (
           <React.Fragment>
             <header id="topnav" className="defaultscroll">
@@ -55,7 +55,13 @@ class Topbar extends Component {
                     ))}
                     </ul>
 
-                    {currentUser.isAuthenticated ? <p>{currentUser.user.username}</p> : 
+                    {currentUser.isAuthenticated ? 
+                    <div>
+                      <p>{currentUser.user.username}</p>
+                      <button className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0' onClick={() => setCurrentUser({})}>Logout</button> 
+                      </div>
+                    
+                    : 
                 <div className='auth-buttons' >
                              <Link to='/login' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Login</Link> 
                              <Link to='/signup' className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0'>Signup</Link> 
@@ -94,4 +100,8 @@ const mapStateToProps = ({ currentUser}) => ({
     currentUser
 });
 
-export default connect(mapStateToProps)(withRouter(Topbar));
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Topbar));
