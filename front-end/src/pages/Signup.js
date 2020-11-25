@@ -1,7 +1,7 @@
 // React Basic and Bootstrap
-import React, { Component } from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Input, Label, FormGroup, Button, Card, CardBody } from 'reactstrap';
+import { Container, Row, Col, Label, FormGroup, Button, Card, CardBody } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 //Import Icons
@@ -10,9 +10,21 @@ import FeatherIcon from 'feather-icons-react';
 // import images
 import signup from '../assets/imgs/signup.svg';
 
-class SignUp extends Component {
+// redux
+import { connect } from 'react-redux';
+import { authUser } from '../store/actions/auth';
 
-    render() {
+const SignUp = ({ authUser }) => {
+
+    const [] = useState()
+        const handleSubmit = (evt) => {
+            evt.preventDefault();
+            console.log(evt);
+        }
+
+        const handleChange = (evt) => {
+
+        }
 
         return (
             <React.Fragment>
@@ -31,7 +43,7 @@ class SignUp extends Component {
                                 <Card className="login_page shadow rounded border-0">
                                     <CardBody>
                                         <h4 className="card-title text-center">Signup</h4>  
-                                    <AvForm className="login-form mt-4">
+                                    <AvForm className="login-form mt-4" onSubmit={handleSubmit}>
                                         <Row>
                                         <Col md="6">
                                                 <FormGroup className="position-relative">
@@ -118,5 +130,9 @@ class SignUp extends Component {
             </React.Fragment>
         );
     }
-}
-export default SignUp;
+
+
+const mapDispatchToProps = dispatch => ({
+    authUser: (type, userData) => dispatch(authUser(type, userData))
+})
+export default connect(null, mapDispatchToProps)(SignUp);

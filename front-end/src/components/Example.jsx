@@ -31,7 +31,7 @@ function Example() {
                 <div className="text-center">
                 <Row className=""><Col><h1>Cases</h1></Col></Row>
                     <Row>
-                    {cases.map(ca =>  <Col md='6' className="py-2 my-4"><Case key={ca.id} caseEach={ca} /></Col>)}
+                    {cases.map(ca =>  <Col md='6' key={ca.id} className="py-2 my-4"><Case  caseEach={ca} /></Col>)}
                     </Row>
                     </div>
                 </Container>

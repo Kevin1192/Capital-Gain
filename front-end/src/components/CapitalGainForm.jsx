@@ -12,7 +12,9 @@ import { MuiPickersUtilsProvider , KeyboardDatePicker } from '@material-ui/picke
 import { ThemeProvider } from '@material-ui/core/styles';
 import {calcuCapitalGainTax} from '../library/capitalGainFunctions';
 
-
+// Redux
+import { connect } from 'react-redux';
+import { addRecord, fetchRecords } from '../store/actions/records';
 
 const theme = createMuiTheme({
   palette: {
@@ -119,7 +121,7 @@ function CapitalGainForm() {
     <Fragment>
       <ThemeProvider theme={theme}>
         <Container>
-          <Grid container fluid style={{ "background-color": "#f8f9fc" }}>
+          <Grid container style={{ "backgroundColor": "#f8f9fc" }}>
             <Grid item lg={4} style={{ margin: "auto" }}>
               <form
                 onSubmit={handleSubmit}
@@ -236,13 +238,13 @@ function CapitalGainForm() {
                 </div>
               <div style= {{"padding" : "40px 0px 60px 30px"}}>
               {values.totalCapitalGainTax === undefined || [
-                <Typography variant="h4" component="h5">
+                <Typography variant="h4" component="h5" key='1'>
                   Your total Capital Gain Tax:{" "}
                   <span className={classes.taxHighlight}>
                     ${values.totalCapitalGainTax}
                   </span>
                 </Typography>,
-                <Typography variant="h4" component="h5"> 
+                <Typography variant="h4" component="h5" key='2'> 
                   Your total Capital Gain after tax:{" "}
                   <span
                     className={
@@ -264,4 +266,12 @@ function CapitalGainForm() {
   );
 }
 
-export default CapitalGainForm;
+const mapStateToProps = ({ records, currentuser, errors }) => ({
+  records,
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchRecords: () => dispatch(fetchRecords()),
+  addRecord: record => dispatch(addRecord(record))
+})
+export default connect(mapStateToProps)(CapitalGainForm);

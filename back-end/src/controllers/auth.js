@@ -41,7 +41,7 @@ exports.signup = async function (req, res, next) {
 
         let userExists = await db.User.findOne({ where: { username: req.body.username }});
 
-        console.log(userExists);
+        console.log(userExists, 'in controller auth');
         if (userExists) {
             return next({
                 status: 400,
@@ -80,3 +80,5 @@ exports.signup = async function (req, res, next) {
         });
 }
 }
+
+

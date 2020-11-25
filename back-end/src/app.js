@@ -9,7 +9,6 @@ const recordRoutes = require('./routes/record')
 const db = require('./models/index');
 const errorHandler = require('./controllers/error');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
-const { getRecords } = require('./controllers/record');
 
 
 require('dotenv').config();
@@ -21,7 +20,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-// delete
+// delete this after
 app.get('/', (req, res, next) => {
     return res.json({
         text: 'hello, success'
@@ -30,8 +29,6 @@ app.get('/', (req, res, next) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users/:id/records',  recordRoutes);
-
-app.get("/api/records", getRecords);
 
 
 
