@@ -56,8 +56,8 @@ class Topbar extends Component {
                     </ul>
 
                     {currentUser.isAuthenticated ? 
-                    <div>
-                      <p>{currentUser.user.username}</p>
+                    <div className='d-flex align-items-center'>
+                      <p className='pr-5 mb-0 username'>Hi, {currentUser.user.username}</p>
                       <button className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0' onClick={() => setCurrentUser({})}>Logout</button> 
                       </div>
                     

@@ -1,12 +1,35 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Label, FormGroup, Button, Card, CardBody } from 'reactstrap';
 
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import FeatherIcon from 'feather-icons-react';
 import loginImg from '../assets/imgs/login.svg';
-function Login() {
+import { authUser } from '../store/actions/auth';
+import { connect } from 'react-redux';
+function Login({ authUser }) {
 
+    
+    const initialState = {
+        username: '',
+        password: '',
+    }
+
+    const [signinState, setSigninState] = useState(initialState);
+
+        const handleSubmit = () => {
+            const { username, password} = signinState;
+            const submitForm = {
+                username,
+                password,
+            }
+            authUser('signin', submitForm)
+        }
+
+        const handleChange = (evt) => {
+            const { value, name } = evt.target;
+            setSigninState({...signinState, [name]: value })
+        }
 
     return(
         <Fragment>
@@ -28,26 +51,26 @@ function Login() {
                                         <div className="card-title text-center">
                                             <h4 className="mb-4">Login</h4>
                                         </div>
-                                        <AvForm className='login-form mt-4'>
+                                        <AvForm className='login-form mt-4' onValidSubmit={handleSubmit}>
                                             <Row>
-                                                <Col lg='12'>
-                                                    <FormGroup className="position-relative">
-                                                        <Label htmlFor="email">Your Email <span className="text-danger">*</span></Label>
-                                                        <i><FeatherIcon icon='mail' className='fea icon-sm icons' /></i>
-                                                        <AvField type='text' className='form-control pl-5' name='email' id='email' placeholder='Enter Your Email Address' required
+                                               <Col lg="12">
+                                                <FormGroup className="position-relative">
+                                                    <Label htmlFor="username">Username <span className="text-danger">*</span></Label>
+                                                    <i><FeatherIcon icon="user" className="fea icon-sm icons" /></i>
+                                                    <AvField type="text" className="form-control pl-5" value={signinState.username} onChange={handleChange} name="username" id="username" placeholder="Username" required
                                                         errorMessage=""
                                                         validate={{
-                                                            required: {value: true, errorMessage: "Please enter your email"},
-                                                            pattern: {value: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$', errorMessage: "Email is not valid" },
-                                                        }} />
-                                                    </FormGroup>
-                                                </Col>
+                                                            required: {value: true, errorMessage: "Please enter username"},
+                                                        }}
+                                                    />
+                                                </FormGroup>
+                                            </Col> 
 
                                                 <Col lg='12'>
                                                     <FormGroup className='position-relative'>
                                                         <Label htmlFor='password'>Password <span className='text-danger'>*</span></Label>
                                                         <i><FeatherIcon icon='lock' className='fea icon-sm icons' /></i>
-                                                        <AvField type='password' className='form-control pl-5' name='password' id='password' placeholder='Enter password' required
+                                                        <AvField type='password' className='form-control pl-5' value={signinState.password} onChange={handleChange} name='password' id='password' placeholder='Enter password' required
                                                         errorMessage=''
                                                         validate={{
                                                             required: {value: true, errorMessage: 'Please enter password'},
@@ -74,5 +97,7 @@ function Login() {
     )
 }
 
-
-export default Login;
+const mapDispatchToProps = dispatch => ({
+    authUser: (type, form) => dispatch(authUser(type, form))
+})
+export default connect(null, mapDispatchToProps)(Login);
