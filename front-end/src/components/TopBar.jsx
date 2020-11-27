@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../store/actions/auth';
+import { logout } from '../store/actions/auth';
 
 class Topbar extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class Topbar extends Component {
 
     
     render() {
-      const { currentUser, setCurrentUser } = this.props;
+      const { currentUser, logout } = this.props;
         return (
           <React.Fragment>
             <header id="topnav" className="defaultscroll">
@@ -58,7 +58,7 @@ class Topbar extends Component {
                     {currentUser.isAuthenticated ? 
                     <div className='d-flex align-items-center'>
                       <p className='pr-5 mb-0 username'>Hi, {currentUser.user.username}</p>
-                      <button className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0' onClick={() => setCurrentUser({})}>Logout</button> 
+                      <button className='btn btn-primary btn-pills mx-1 px-3 my-1 my-md-0' onClick={() => logout()}>Logout</button> 
                       </div>
                     
                     : 
@@ -96,12 +96,12 @@ class Topbar extends Component {
     }
 }
 
-const mapStateToProps = ({ currentUser}) => ({
+const mapStateToProps = ({ currentUser }) => ({
     currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  logout: () => dispatch(logout()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Topbar));

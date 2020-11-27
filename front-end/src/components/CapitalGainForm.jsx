@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CapitalGainForm() {
+function CapitalGainForm({ errors }) {
     const classes = useStyles();
     
   const [values, setValues] = React.useState({
@@ -68,9 +68,10 @@ function CapitalGainForm() {
     capitalGain: 0,
     totalCapitalGainTax: 0,
     capitalGainAfterTax: 0,
-    records: [],
+    
   });
 
+  const [records, setRecords ] = React.useState([]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -83,7 +84,7 @@ function CapitalGainForm() {
 
     React.useEffect(() => {
         let record = {},
-        notInclude = ["purchaseAmount", "saleAmount", "records"];
+        notInclude = ["purchaseAmount", "saleAmount"];
 
       if (!initialRender.current) {
         initialRender.current = true;
@@ -93,10 +94,10 @@ function CapitalGainForm() {
         if (!notInclude.includes(key)) record[key] = value;
         if (key === 'selectedPurchaseDate' || key === 'selectedSaleDate') record[key] = value.toLocaleDateString();
       }
-      setValues((preState) => {
-        let newRecords = preState.records.slice();
+      setRecords((preState) => {
+        let newRecords = preState.slice();
         newRecords.push(record);
-        return {...preState, records: newRecords};
+        return newRecords;
       })
     }, [values.id]);
 
@@ -112,9 +113,9 @@ function CapitalGainForm() {
 
   const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
   
-  const tableBodyHtml = values.records.length === 0 ? [] : values.records.map(record => {
+  const tableBodyHtml = records.length === 0 ? [] : records.map((record, idx) => {
   const tbValues = Object.values(record).map((value, idx) => (<td key={idx}>{value}</td>));
-    return (<tr>{tbValues}</tr>);
+    return (<tr key={idx}>{tbValues}</tr>);
   });
 
   return (
@@ -266,12 +267,13 @@ function CapitalGainForm() {
   );
 }
 
-const mapStateToProps = ({ records, currentuser, errors }) => ({
+const mapStateToProps = ({ records, errors }) => ({
   records,
+  errors
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchRecords: () => dispatch(fetchRecords()),
   addRecord: record => dispatch(addRecord(record))
 })
-export default connect(mapStateToProps)(CapitalGainForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CapitalGainForm);

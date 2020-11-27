@@ -10,7 +10,6 @@ class Section extends Component {
     }
     render() {
         const { currentUser } = this.props;
-        console.log(currentUser);
         return (
             <React.Fragment>
                 <section className="bg-half-170 w-100 overflow-hidden" id="home">
