@@ -13,9 +13,8 @@ exports.getRecords = async (req, res, next) => {
 
 exports.createRecord = async function(req, res, next) {
     try {
-        console.log(req.params.id)
         let user = await db.User.findOne({ where: { id: req.params.id }});
-
+        console.log(req.body, 'bodydd') 
         let record = await user.createRecord(req.body);
         console.log('see record', record);
         return res.status(200).json(record);

@@ -1,6 +1,6 @@
 import 'date-fns';
 import MomentUtils from "@date-io/date-fns";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState, useLayoutEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,7 +14,7 @@ import {calcuCapitalGainTax} from '../library/capitalGainFunctions';
 
 // Redux
 import { connect } from 'react-redux';
-import { addRecord, fetchRecords } from '../store/actions/records';
+import { addRecordToDb, fetchRecords } from '../store/actions/records';
 
 const theme = createMuiTheme({
   palette: {
@@ -54,69 +54,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CapitalGainForm({ errors }) {
+function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addRecordToDb }) {
     const classes = useStyles();
     
   const [values, setValues] = React.useState({
-    id: 0,
     filingStatus: "Single",
     taxableIncome: 0,
-    selectedPurchaseDate: new Date(),
-    selectedSaleDate: new Date(),
+    purchaseDate: new Date(),
+    saleDate: new Date(),
     purchaseAmount: 0,
     saleAmount: 0,
     capitalGain: 0,
     totalCapitalGainTax: 0,
     capitalGainAfterTax: 0,
-    
   });
 
-  const [records, setRecords ] = React.useState([]);
+  const [tableRecords, setTableRecords ] = React.useState([]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let totalCGTax = calcuCapitalGainTax(values),
         CG = values.saleAmount - values.purchaseAmount;
-        setValues((preState) => ({...preState, totalCapitalGainTax: totalCGTax, capitalGain: CG, capitalGainAfterTax: (CG - totalCGTax), id: preState.id+1}));
+    let newRecord = {...values, totalCapitalGainTax: totalCGTax, capitalGain: CG, capitalGainAfterTax: (CG - totalCGTax)};
+    addRecordToDb(newRecord, currentUser.user.id);
+    setValues(newRecord);
   }
 
   const initialRender = React.useRef(false);
-
-    React.useEffect(() => {
-        let record = {},
-        notInclude = ["purchaseAmount", "saleAmount"];
-
-      if (!initialRender.current) {
-        initialRender.current = true;
-        return;
+    // load data on mount 
+    useEffect(() => {
+      let userId = currentUser.user.id;
+      const fetchData = async (id) => {
+       await fetchRecords(id);
       }
-      for (const [key, value] of Object.entries(values)) {
-        if (!notInclude.includes(key)) record[key] = value;
-        if (key === 'selectedPurchaseDate' || key === 'selectedSaleDate') record[key] = value.toLocaleDateString();
-      }
-      setRecords((preState) => {
-        let newRecords = preState.slice();
-        newRecords.push(record);
-        return newRecords;
+      fetchData(userId);
+    },[])
+
+    // update when reduxRecords update
+    useEffect(() => {
+      console.log(values.purchaseDate, 'date')
+    })
+    const tableHeader = ['id', 'filingStatus', 'taxableIncome', 'purchaseDate', 'saleDate', 'capitalGain', 'totalCapitalGainTax', 'capitalGainAfterTax']
+    const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
+    useLayoutEffect(() => {
+      let tableBodyHtml;
+      console.log(reduxRecords, 'reduxrecord')
+       tableBodyHtml = reduxRecords.length === 0 ? [] : reduxRecords.map((record, idx) => {
+       const tbValues = tableHeader.map((header, idx) => {
+       if (header === 'saleDate' || header === 'purchaseDate') {
+         const time = record[header];
+       return <td key={idx}>{time.slice(0,10)}</td>
+       }
+      return <td key={idx}>{record[header]}</td>
       })
-    }, [values.id]);
+        return (<tr key={idx}>{tbValues}</tr>);
+      });
+      setTableRecords(tableBodyHtml);
+    }, [reduxRecords])
+     
 
   const handleDateChange = (prop) => (date) => {
       setValues({...values, [prop]: date});
+  
   }
+
+
   const handleChange = (prop) => (event) => {
     setValues({...values, [prop]: event.target.value});
   };
 
-
-  const tableHeader = ['id', 'filingStatus', 'taxableIncome', 'PurchaseDate', 'SaleDate', 'CapitalGain', 'totalCapitalGainTax', 'CapitalGainAfterTax']
-
-  const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
-  
-  const tableBodyHtml = records.length === 0 ? [] : records.map((record, idx) => {
-  const tbValues = Object.values(record).map((value, idx) => (<td key={idx}>{value}</td>));
-    return (<tr key={idx}>{tbValues}</tr>);
-  });
 
   return (
     <Fragment>
@@ -176,8 +182,8 @@ function CapitalGainForm({ errors }) {
                       id="purchase-date-dialog"
                       label="Purchase Date"
                       format="MM/dd/yyyy"
-                      value={values.selectedPurchaseDate}
-                      onChange={handleDateChange("selectedPurchaseDate")}
+                      value={values.purchaseDate}
+                      onChange={handleDateChange("purchaseDate")}
                     />
 
                     <FormControl variant="outlined" className={classes.margin}>
@@ -200,8 +206,8 @@ function CapitalGainForm({ errors }) {
                       id="sale-date-dialog"
                       label="Sale Date"
                       format="MM/dd/yyyy"
-                      value={values.selectedSaleDate}
-                      onChange={handleDateChange("selectedSaleDate")}
+                      value={values.saleDate}
+                      onChange={handleDateChange("saleDate")}
                     />
 
                     <FormControl variant="outlined" className={classes.margin}>
@@ -234,7 +240,7 @@ function CapitalGainForm({ errors }) {
                       {tableHeaderHtml}
                     </tr>
                   </thead>
-                    <tbody>{tableBodyHtml}</tbody>
+                    <tbody>{tableRecords}</tbody>
                   </table>
                 </div>
               <div style= {{"padding" : "40px 0px 60px 30px"}}>
@@ -267,13 +273,14 @@ function CapitalGainForm({ errors }) {
   );
 }
 
-const mapStateToProps = ({ records, errors }) => ({
-  records,
-  errors
+const mapStateToProps = ({ records, currentUser, errors }) => ({
+  reduxRecords: records,
+  errors,
+  currentUser
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchRecords: () => dispatch(fetchRecords()),
-  addRecord: record => dispatch(addRecord(record))
+  fetchRecords: (id) => dispatch(fetchRecords(id)),
+  addRecordToDb: (record, id) => dispatch(addRecordToDb(record, id))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalGainForm);

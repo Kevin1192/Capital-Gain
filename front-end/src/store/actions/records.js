@@ -9,14 +9,19 @@ export const loadRecords = records => ({
 });
 
 
-export const fetchRecords = () => {
+export const fetchRecords = (id) => {
     return dispatch => {
-        return apiCall("get", "/api/records")
+        const localHost = 'http://localhost:3001';
+        const url = `${localHost}/api/users/${id}/records`; 
+        return apiCall("get", url)
         .then(res => {
+            console.log('log fetch records', res)
             dispatch(loadRecords(res));
+            return res;
         })
         .catch(err => {
-            dispatch(addError(err.message));
+            let message = err.message ? err.message : 'something went wrong';
+            dispatch(addError(message));
         });
 
     };
@@ -29,12 +34,18 @@ export const addRecord = (record) => ({
 
 export const addRecordToDb = (record, id) => {
     return dispatch => {
-        return apiCall('post', `/api/users/${id}/records/`, record)
+        const localHost = 'http://localhost:3001';
+        const url = `${localHost}/api/users/${id}/records`; 
+        return apiCall("post", url, record)
         .then(res => {
             dispatch(addRecord(res))
+            return res;
         })
         .catch(err => {
-            dispatch(addError(err.message))
+            console.log(err, 'err');
+            if (!err) return;
+            let message = err.message ? err.message : 'something went wrong' 
+            dispatch(addError(message))
         })
     }
 }

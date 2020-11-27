@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const {sequelize} = require('./index');
 
 const Record = sequelize.define('record', {
-    fillingStatus: {
+    filingStatus: {
         type: Sequelize.STRING,
     },
     taxableIncome: {
@@ -11,7 +11,7 @@ const Record = sequelize.define('record', {
     purchaseDate: {
         type: Sequelize.DATE,
     },
-    SaleDate: {
+    saleDate: {
         type: Sequelize.DATE,
     },
     capitalGain: {
@@ -22,6 +22,9 @@ const Record = sequelize.define('record', {
     },
     capitalGainAfterTax: {
         type: Sequelize.DOUBLE,
+    },
+    capitalGain: {
+        type: Sequelize.DOUBLE
     }
 })
 
