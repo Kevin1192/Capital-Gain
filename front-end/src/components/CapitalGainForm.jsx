@@ -1,6 +1,6 @@
 import 'date-fns';
 import MomentUtils from "@date-io/date-fns";
-import React, { Fragment, useEffect, useState, useLayoutEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addRecordToDb }) {
     const classes = useStyles();
     
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     filingStatus: "Single",
     taxableIncome: 0,
     purchaseDate: new Date(),
@@ -69,7 +69,7 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
     capitalGainAfterTax: 0,
   });
 
-  const [tableRecords, setTableRecords ] = React.useState([]);
+  const [tableRecords, setTableRecords ] = useState([]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -80,7 +80,6 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
     setValues(newRecord);
   }
 
-  const initialRender = React.useRef(false);
     // load data on mount 
     useEffect(() => {
       let userId = currentUser.user.id;
@@ -94,9 +93,10 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
     useEffect(() => {
       console.log(values.purchaseDate, 'date')
     })
+
     const tableHeader = ['id', 'filingStatus', 'taxableIncome', 'purchaseDate', 'saleDate', 'capitalGain', 'totalCapitalGainTax', 'capitalGainAfterTax']
     const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
-    useLayoutEffect(() => {
+    useEffect(() => {
       let tableBodyHtml;
       console.log(reduxRecords, 'reduxrecord')
        tableBodyHtml = reduxRecords.length === 0 ? [] : reduxRecords.map((record, idx) => {
@@ -128,6 +128,7 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
     <Fragment>
       <ThemeProvider theme={theme}>
         <Container>
+          <h4>{errors.message}</h4>
           <Grid container style={{ "backgroundColor": "#f8f9fc" }}>
             <Grid item lg={4} style={{ margin: "auto" }}>
               <form

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect, Provider} from 'react-redux'
+import React  from 'react';
+import { connect } from 'react-redux'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './assets/css/default.css';
 import './App.scss';

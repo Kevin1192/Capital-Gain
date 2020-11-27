@@ -5,11 +5,8 @@ import img from '../assets/imgs/moneygrow-nobg.png';
 
 
 class Section extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
-        const { currentUser } = this.props;
         return (
             <React.Fragment>
                 <section className="bg-half-170 w-100 overflow-hidden" id="home">
@@ -37,7 +34,4 @@ class Section extends Component {
     }
 }
 
-const mapStateToProps = ({ currentUser}) => ({
-    currentUser
-})
-export default connect(mapStateToProps)(Section);
+export default connect(null)(Section);
