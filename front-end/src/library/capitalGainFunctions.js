@@ -12,14 +12,14 @@ const calcuCapitalGainTax = (states) => {
 
 const determineTermAndSd = (states) => {
   const {
-    selectedPurchaseDate,
-    selectedSaleDate,
+    purchaseDate,
+    saleDate,
     filingStatus,
   } = states;
   let rate, sd, term, oneYearAfterPurchase;
-  oneYearAfterPurchase = new Date(selectedPurchaseDate);
-  oneYearAfterPurchase.setFullYear(selectedPurchaseDate.getFullYear() + 1);
-  if (oneYearAfterPurchase <= selectedSaleDate) {
+  oneYearAfterPurchase = new Date(purchaseDate);
+  oneYearAfterPurchase.setFullYear(purchaseDate.getFullYear() + 1);
+  if (oneYearAfterPurchase <= saleDate) {
     term = "long";
   } else {
     term = "short";
