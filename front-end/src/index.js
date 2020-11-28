@@ -8,11 +8,13 @@ import { configureStore } from './store';
 import { setCurrentUser } from './store/actions/auth';
 import JwtDecode from 'jwt-decode';
 import { setTokenHeader } from './library/api';
+import { removeError } from './store/actions/errors';
 
 
 const store = configureStore();
 
 if (localStorage.jwtToken) {
+  store.dispatch(removeError());
   setTokenHeader(localStorage.jwtToken);
   try {
     store.dispatch(setCurrentUser(JwtDecode(localStorage.jwtToken)))

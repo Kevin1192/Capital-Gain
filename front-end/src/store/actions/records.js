@@ -11,6 +11,7 @@ export const loadRecords = records => ({
 
 export const fetchRecords = (id) => {
     return dispatch => {
+        if (!id) return dispatch(loadRecords([]));
         const localHost = 'http://localhost:3001';
         const url = `${localHost}/api/users/${id}/records`; 
         return apiCall("get", url)
@@ -48,4 +49,24 @@ export const addRecordToDb = (record, id) => {
             dispatch(addError(message))
         })
     }
+}
+
+export const removeRecordAndUpdate = (id, recordId) => {
+    return dispatch => {
+        if (!id || !recordId) return;
+        const localHost = 'http://localhost:3001';
+        const url = `${localHost}/api/users/${id}/records/${recordId}`;
+        return apiCall('delete', url)
+        .then( () => {
+            apiCall('get', `${localHost}/api/users/${id}/records`)
+            .then(res => {
+                dispatch(loadRecords(res))
+                return res;
+            })
+        })
+        .catch(err => {
+            let message = err.message ? err.message : 'something went wrong';
+            dispatch(addError(message));
+    })
+}
 }

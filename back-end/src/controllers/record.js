@@ -33,7 +33,8 @@ exports.deleteRecord = async function(req, res, next) {
 
     await user.removeRecord(record);
     await record.destroy();
-    return res.status(200).json('delete record success');
+    
+    return res.status(200).json();
    } catch (err) {
     console.log(err.message, 'err in delete record function')
     return next(err);

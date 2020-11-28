@@ -14,7 +14,8 @@ import {calcuCapitalGainTax} from '../library/capitalGainFunctions';
 
 // Redux
 import { connect } from 'react-redux';
-import { addRecordToDb, fetchRecords } from '../store/actions/records';
+import { addRecordToDb, fetchRecords, removeRecordAndUpdate } from '../store/actions/records';
+import { addError } from '../store/actions/errors';
 
 const theme = createMuiTheme({
   palette: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addRecordToDb }) {
+function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addRecordToDb, addError, removeRecordAndUpdate }) {
     const classes = useStyles();
     
   const [values, setValues] = useState({
@@ -73,11 +74,19 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if (!currentUser.user.id) {
+      addError('Please sign in or sign up first');
+      return;
+    }
     let totalCGTax = calcuCapitalGainTax(values),
         CG = values.saleAmount - values.purchaseAmount;
     let newRecord = {...values, totalCapitalGainTax: totalCGTax, capitalGain: CG, capitalGainAfterTax: (CG - totalCGTax)};
     addRecordToDb(newRecord, currentUser.user.id);
     setValues(newRecord);
+  }
+
+  const handleDeleteClick = (id, recordId) => {
+    removeRecordAndUpdate(id, recordId);
   }
 
     // load data on mount 
@@ -87,7 +96,7 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
        await fetchRecords(id);
       }
       fetchData(userId);
-    },[])
+    },[currentUser.user.id])
 
     // update when reduxRecords update
     useEffect(() => {
@@ -100,14 +109,18 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
       let tableBodyHtml;
       console.log(reduxRecords, 'reduxrecord')
        tableBodyHtml = reduxRecords.length === 0 ? [] : reduxRecords.map((record, idx) => {
+         const recordId = record.id;
        const tbValues = tableHeader.map((header, idx) => {
        if (header === 'saleDate' || header === 'purchaseDate') {
          const time = record[header];
        return <td key={idx}>{time.slice(0,10)}</td>
        }
       return <td key={idx}>{record[header]}</td>
-      })
-        return (<tr key={idx}>{tbValues}</tr>);
+      });
+        return (<tr key={idx}>
+          <td><button className='btn btn-danger' onClick={() => handleDeleteClick(currentUser.user.id, recordId)}>X</button></td>
+          {tbValues}
+          </tr>);
       });
       setTableRecords(tableBodyHtml);
     }, [reduxRecords])
@@ -238,6 +251,7 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
                   <table>
                   <thead>
                     <tr>
+                      <td></td>
                       {tableHeaderHtml}
                     </tr>
                   </thead>
@@ -282,6 +296,8 @@ const mapStateToProps = ({ records, currentUser, errors }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchRecords: (id) => dispatch(fetchRecords(id)),
-  addRecordToDb: (record, id) => dispatch(addRecordToDb(record, id))
+  addRecordToDb: (record, id) => dispatch(addRecordToDb(record, id)),
+  addError: (errMessage) => dispatch(addError(errMessage)),
+  removeRecordAndUpdate: (id, recordId) => dispatch(removeRecordAndUpdate(id, recordId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalGainForm);

@@ -13,6 +13,7 @@ import signup from '../assets/imgs/signup.svg';
 // redux
 import { connect } from 'react-redux';
 import { authUser } from '../store/actions/auth';
+import { removeError } from '../store/actions/errors';
 
 const SignUp = ({ authUser, errors }) => {
 
@@ -32,7 +33,7 @@ const SignUp = ({ authUser, errors }) => {
                 password,
                 email,
             }
-            authUser('signup', submitForm)
+            authUser('signup', submitForm);
         }
 
         const handleChange = (evt) => {
