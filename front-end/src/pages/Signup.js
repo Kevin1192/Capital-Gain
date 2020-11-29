@@ -13,7 +13,6 @@ import signup from '../assets/imgs/signup.svg';
 // redux
 import { connect } from 'react-redux';
 import { authUser } from '../store/actions/auth';
-import { removeError } from '../store/actions/errors';
 
 const SignUp = ({ authUser, errors }) => {
 

@@ -96,18 +96,17 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
        await fetchRecords(id);
       }
       fetchData(userId);
+      // eslint-disable-next-line
     },[currentUser.user.id])
 
     // update when reduxRecords update
     useEffect(() => {
-      console.log(values.purchaseDate, 'date')
     })
 
     const tableHeader = ['id', 'filingStatus', 'taxableIncome', 'purchaseDate', 'saleDate', 'capitalGain', 'totalCapitalGainTax', 'capitalGainAfterTax']
     const tableHeaderHtml = tableHeader.map((header, idx) => (<th key={idx}>{header}</th>))
     useEffect(() => {
       let tableBodyHtml;
-      console.log(reduxRecords, 'reduxrecord')
        tableBodyHtml = reduxRecords.length === 0 ? [] : reduxRecords.map((record, idx) => {
          const recordId = record.id;
        const tbValues = tableHeader.map((header, idx) => {
@@ -123,6 +122,7 @@ function CapitalGainForm({ errors, currentUser, reduxRecords, fetchRecords, addR
           </tr>);
       });
       setTableRecords(tableBodyHtml);
+      // eslint-disable-next-line
     }, [reduxRecords])
      
 

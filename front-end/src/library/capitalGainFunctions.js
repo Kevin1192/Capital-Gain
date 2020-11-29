@@ -3,7 +3,6 @@ import standardDeduction from "../constants/standardDeduction";
 
 const calcuCapitalGainTax = (states) => {
   const capitalGain = states.saleAmount - states.purchaseAmount;
-  console.log("capital gain " + capitalGain);
   if (capitalGain <= 0) return 0;
   const [rate, sd] = determineTermAndSd(states);
   const incomeAfterDeduction = states.taxableIncome > sd ? (states.taxableIncome - sd) : 0;
@@ -91,9 +90,6 @@ const determineStandardDeduction = (filingStatus) => {
 };
 
 const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
-    console.log(capitalGain, 'capitalgain');
-    console.log('incomeAfterdeduc', incomeAfterDeduction);
-    console.log(rate);
   const capitalGainWithIncome = capitalGain + incomeAfterDeduction;
   let incomeLimit, capitalGainLimit, totalCapitalGainTax;
   // find Limits for incomeAfterSD: [rate, Amount, index]
@@ -113,7 +109,6 @@ const finalCalcu = (rate, incomeAfterDeduction, capitalGain) => {
     }
   }
 
-    console.log(capitalGainLimit);
 
 
   //if incomeLimit and capitalGainLimit are the same, CG * limit rate;
